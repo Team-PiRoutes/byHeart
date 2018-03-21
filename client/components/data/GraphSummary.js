@@ -82,15 +82,16 @@ class GraphSummary extends React.Component {
     console.log('showTime event', e)
   }
   render() {
-
-    const time = this.state.time === null ? 'Mouse Over For Time' : this.state.time
+    // const time = this.state.time === null ? (<i aria-hidden="true" class="clock large icon"></i>) ?
+    //   (<h4 style={this.timeDisplayStyle}>{time} </h4>)
+    const time = 'sdf'
     const chart = this.chart(data)
     return (
       <div style={this.containerStyle} onMouseLeave={this.mouseLeaveChart}>
         <h3 style={{ color: '#a333c8', textAlign: 'center' }}> Previous Times</h3>
         <div style={this.chartStyle}>{chart}</div>
         <h4 style={this.timeDisplayStyle}>{time} </h4>
-      </div >
+      </div>
     )
   }
 }
