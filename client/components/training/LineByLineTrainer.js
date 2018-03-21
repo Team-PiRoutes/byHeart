@@ -64,6 +64,7 @@ class LineByLineTrainer extends Component {
     else if (code === HARDER) this.makeHarder()
     else if (code === EASIER) this.makeEasier()
     else if (code === START) this.nextCard()
+    else if (code === MOVE) this.nextCard()
   }
 
   handleFinishedKey(code) {
