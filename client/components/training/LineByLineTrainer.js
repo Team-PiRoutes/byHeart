@@ -34,13 +34,10 @@ class LineByLineTrainer extends Component {
     this.makeHarder = this.makeHarder.bind(this)
     this.startHarder = this.startHarder.bind(this)
     this.startEasier = this.startEasier.bind(this)
-<<<<<<< HEAD
     this.handleInputChange = this.handleInputChange.bind(this)
-=======
     this.handleFinishedKey = this.handleFinishedKey.bind(this)
     this.handleTrainingKey = this.handleTrainingKey.bind(this)
     this.handleWaitingKey = this.handleWaitingKey.bind(this)
->>>>>>> 1cb225ffb579231039d89ff5f33e053b04b952f4
   }
 
   handleKeyPress(event) {
