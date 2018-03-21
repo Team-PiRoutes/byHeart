@@ -8,7 +8,16 @@ import './LandingPage.css'
 
 
 const card1 = [
-  'Qurious how it works? For a quick start press Try An Example and train memorizing a sonet.',
+  'Read full text at once or line-by-line',
+]
+const card2 = [
+  'Easily switch between 10 difficulty levels',
+]
+const card3 = [
+  'Edit and save your passages',
+]
+const card4 = [
+  'Never forget your lines again! ',
 ]
 
 class LandingPage extends Component {
@@ -67,26 +76,26 @@ class LandingPage extends Component {
             <Grid columns={3}>
               <Grid.Column width={4}>
                 <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="Step 1" style={{ fontSize: '0.7em' }} />
+                  <Card.Content header="LEARN" style={{ fontSize: '0.7em' }} />
                   <Card.Content description={card1} />
                 </Card>
               </Grid.Column>
               <Grid.Column width={4}>
                 <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="Step 2" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card1} />
+                  <Card.Content header="IT" style={{ fontSize: '0.7em' }} />
+                  <Card.Content description={card2} />
                 </Card>
               </Grid.Column>
               <Grid.Column width={4}>
                 <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="Step 3" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card1} />
+                  <Card.Content header="BY" style={{ fontSize: '0.7em' }} />
+                  <Card.Content description={card3} />
                 </Card>
               </Grid.Column>
               <Grid.Column width={4}>
                 <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="Step 3" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card1} />
+                  <Card.Content header="HEART" style={{ fontSize: '0.7em' }} />
+                  <Card.Content description={card4} />
                 </Card>
               </Grid.Column>
             </Grid>
