@@ -9,8 +9,8 @@ class PassageForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
-      content: '',
+      title: this.props.passage.title || '',
+      content: this.props.passage.content || '',
       label: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -31,6 +31,8 @@ class PassageForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
+    // if user goes to the 'new' form with a passage in the store
     if (nextProps.match.path === '/passages/new') {
       if (nextProps.passage.id) {
         history.push(`/passages/${nextProps.passage.id}/edit`)
@@ -38,7 +40,6 @@ class PassageForm extends Component {
     }
 
     if (nextProps.passage && (nextProps.passage.title || nextProps.passage.content)) {
-      console.log('nextProps: ', nextProps)
       this.setState({
         title: nextProps.passage.title,
         content: nextProps.passage.content
@@ -72,13 +73,14 @@ class PassageForm extends Component {
   render() {
 
     const { handleStart, handleSave, userId, handleUpdate, passage } = this.props
+    // console.log('passage: ', passage)
     const { title, content } = this.state
     const label = this.getLabel()
 
     return (
 
       <Segment style={{ marginLeft: '2%', marginRight: '2%' }}>
-        <Form onSubmit={handleStart}>
+        <Form onSubmit={(event) => {handleStart(event, passage)}}>
           <Label pointing="below" size="large">{label}</Label>
           <Input
             value={title}
@@ -134,14 +136,19 @@ const mapDispatch = (dispatch) => {
     loadInitialData(passageId) {
       dispatch(fetchPassage(passageId))
     },
-    handleStart(event) {
+    handleStart(event, passage) {
+
       event.preventDefault()
-      const passage = {
-        title: event.target.passageTitle.value,
-        content: event.target.passageContent.value
-      }
+      passage.title = event.target.passageTitle.value
+      passage.content = event.target.passageContent.value
+
       dispatch(gotPassage(passage))
-      history.push('/train/')
+
+      if (passage.id) {
+        history.push(`/train/${passage.id}`)
+      } else {
+        history.push('/train/')
+      }
     },
     handleSave(authorId, passage, event) {
       passage.title = document.getElementById('formTitle').value

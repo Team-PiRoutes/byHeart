@@ -54,7 +54,6 @@ class TipText extends React.Component {
         styleObj.textShadow = hintColor ? hintColor : 'rgb(78, 78, 78) 0px 0px 0.5px'
       }
     }
-    console.log(styleObj)
     return (
       <span
         onMouseEnter={this.handleMouseEnter} onMouseOut={this.handleMouseOut}
