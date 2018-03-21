@@ -11,4 +11,8 @@ export { default as NewPassage } from './NewPassage'
 export { default as Training } from './Training'
 export { default as PassageTraining } from './training/PassageTraining'
 export { default as LandingPage } from './LandingPage'
+<<<<<<< HEAD
 export { default as GraphSummary } from './data/GraphSummary'
+=======
+export { default as PassageForm } from './PassageForm'
+>>>>>>> 1cb225ffb579231039d89ff5f33e053b04b952f4

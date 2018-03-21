@@ -11,11 +11,12 @@
     min-width: 200pxs;
 }
 
-.passageText {
-    font-size: 2em;
+.passageTextContainer {
+    font-size: 1.85rem;
     font-family: PancakeFont, FallbackFont, sans-serif;
     color: black;
-    line-height: 1.5em;
+    line-height: 2.4rem;
+    padding: 1rem 2rem;
 }
 
 .container {

@@ -1,7 +1,7 @@
 .passageText {
     position: relative;
-    line-height: 1.5;
-    font-size: 1.6em;
+    line-height: 3rem;
+    font-size: 1.85rem;
     margin-bottom: 8px;
     font-family: PancakeFont, FallbackFont, sans-serif;
     color: #333;

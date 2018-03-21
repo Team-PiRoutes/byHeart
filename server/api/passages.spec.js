@@ -10,24 +10,25 @@ describe('Passage routes', () => {
     return db.sync({ force: true})
   })
 
+  const passages = [
+    {
+      title: 'speech',
+      content: 'Several paragraphs of golden words',
+      isPublic: false
+    },
+    {
+      title: 'monolog',
+      content: 'Extremely dramatic lines',
+      isPublic: true
+    },
+    {
+      title: 'mark 1:2',
+      content: 'Bible quotations',
+      isPublic: true
+    },
+  ]
+
   describe('GET /api/passages', () => {
-    const passages = [
-      {
-        title: 'speech',
-        content: 'Several paragraphs of golden words',
-        isPublic: false
-      },
-      {
-        title: 'monolog',
-        content: 'Extremely dramatic lines',
-        isPublic: true
-      },
-      {
-        title: 'mark 1:2',
-        content: 'Bible quotations',
-        isPublic: true
-      },
-    ]
 
     beforeEach(() => Passage.bulkCreate(passages))
 
@@ -86,6 +87,20 @@ describe('Passage routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body.title).to.equal('new title')
+        })
+    })
+  })
+
+  describe('GET /api/passages/:id', () => {
+    beforeEach(() => Passage.bulkCreate(passages))
+
+    it('should get one passage', () => {
+      return request(app)
+        .get('/api/passages/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body.title).to.equal('speech')
+          expect(res.body.content).to.equal('Several paragraphs of golden words')
         })
     })
   })

@@ -17,6 +17,7 @@ class TipText extends React.Component {
   }
 
   hintTick() {
+
     const hintObj = individualWordHint(this.props.hintArray, this.state.hintLevel)
     this.setState({
       hover: true,
@@ -25,6 +26,9 @@ class TipText extends React.Component {
   }
 
   handleMouseEnter(e) {
+    this.setState({
+      hover: true
+    })
     this.intervalId = setInterval(this.hintTick, 1500)
   }
 
@@ -37,10 +41,23 @@ class TipText extends React.Component {
     })
   }
 
-
   render() {
+    //optional props for colors
+    let { highLight, hintColor } = this.props
+    let styleObj = {}
+
+    if (this.state.hover) {
+      styleObj.backgroundColor = highLight ? highLight : `rgb(240, 238, 241)`
+
+      const isHint = this.state.hintLevel !== this.props.decimateLevel
+      if (isHint) {
+        styleObj.textShadow = hintColor ? hintColor : 'rgb(78, 78, 78) 0px 0px 0.5px'
+      }
+    }
     return (
-      <span onMouseEnter={this.handleMouseEnter} onMouseOut={this.handleMouseOut}>
+      <span
+        onMouseEnter={this.handleMouseEnter} onMouseOut={this.handleMouseOut}
+        style={styleObj}>
         {this.props.hintArray[this.state.hintLevel]}  </span>
     )
   }

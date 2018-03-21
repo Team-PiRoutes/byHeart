@@ -1,4 +1,4 @@
-import { Profile } from './Profile'
+import { Profile } from './Profile.js'
 import React from 'react'
 import enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'

@@ -106,13 +106,12 @@ const mapState = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     handleTrainPassage(passage) {
-      localStorage.setItem('passage', JSON.stringify(passage))
       dispatch(gotPassage(passage))
       history.push('/train')
     },
     handleStartPassage() {
       dispatch(gotPassage({}))
-      history.push('/newpassage')
+      history.push('/passages/new')
     }
   }
 }

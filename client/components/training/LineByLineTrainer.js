@@ -34,18 +34,44 @@ class LineByLineTrainer extends Component {
     this.makeHarder = this.makeHarder.bind(this)
     this.startHarder = this.startHarder.bind(this)
     this.startEasier = this.startEasier.bind(this)
+<<<<<<< HEAD
     this.handleInputChange = this.handleInputChange.bind(this)
+=======
+    this.handleFinishedKey = this.handleFinishedKey.bind(this)
+    this.handleTrainingKey = this.handleTrainingKey.bind(this)
+    this.handleWaitingKey = this.handleWaitingKey.bind(this)
+>>>>>>> 1cb225ffb579231039d89ff5f33e053b04b952f4
   }
 
   handleKeyPress(event) {
-    if (event.code === NEXT) this.nextCard()
-    else if (event.code === PREVIOUS) this.previousCard()
-    else if (event.code === HARDER) this.makeHarder()
-    else if (event.code === EASIER) this.makeEasier()
-    else if (event.code === START && this.state.status === WAITING_TO_BEGIN) this.startTraining()
-    else if (event.code === START && this.state.status === TRAINING) this.nextCard()
-    else if (event.code === MOVE && this.state.status === WAITING_TO_BEGIN) this.startTraining()
-    else if (event.code === MOVE && this.state.status === TRAINING) this.nextCard()
+    const { status } = this.state
+    const { code } = event
+    console.log('code: ', code)
+
+    if (status === WAITING_TO_BEGIN) {
+      this.handleWaitingKey(code)
+    } else if (status === TRAINING) {
+      this.handleTrainingKey(code)
+    } else if (status === FINISHED) {
+      this.handleFinishedKey(code)
+    }
+  }
+
+  handleWaitingKey(code) {
+    if (code === START) this.startTraining()
+    else if (code === MOVE) this.startTraining()
+  }
+
+  handleTrainingKey(code) {
+    if (code === NEXT) this.nextCard()
+    else if (code === PREVIOUS) this.previousCard()
+    else if (code === HARDER) this.makeHarder()
+    else if (code === EASIER) this.makeEasier()
+    else if (code === START) this.nextCard()
+  }
+
+  handleFinishedKey(code) {
+    if (code === START) this.startTraining()
   }
 
   componentDidMount() {
