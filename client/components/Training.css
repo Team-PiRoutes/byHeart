@@ -1,6 +1,18 @@
 .documentTitle {
-    text-align: center;
-    font-size: 2em;
-    font-family: PancakeFont, FallbackFont, sans-serif;
-    color: BLACK;
+  text-align: center;
+  font-size: 2em;
+  font-family: PancakeFont, FallbackFont, sans-serif;
+  color: BLACK;
+}
+
+.corner-button {
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  z-index: 10;
+}
+
+#training-page {
+  position: relative;
 }

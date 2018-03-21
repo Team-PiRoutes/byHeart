@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Login, Signup, Profile, NewPassage, Training, LandingPage } from './components'
+import { Login, Signup, Profile, Training, LandingPage, PassageForm, GraphSummary } from './components'
+
 import { me, fetchPassages } from './store'
 
 /**
@@ -19,11 +20,15 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route path="/stats" component={GraphSummary} />
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/train/:id" component={Training} />
         <Route path="/train" component={Training} />
-        <Route path="/newpassage" component={NewPassage} />
+        <Route path="/newpassage" component={PassageForm} />
+        <Route exact path="/passages/new" component={PassageForm} />
+        <Route exact path="/passages/:id/edit" component={PassageForm} />
         {
           isLoggedIn &&
           <Switch>

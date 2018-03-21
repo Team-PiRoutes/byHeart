@@ -4,7 +4,6 @@ const { Passage } = require('../db/models')
 
 // GET /api/passages/
 router.get('/', (req, res, next) => {
-  // console.log(req.user)
   const where = req.user ?
     { [Op.or]: [{authorId: req.user.id}, { isPublic: true }] } :
     { isPublic: true }
@@ -14,6 +13,13 @@ router.get('/', (req, res, next) => {
     .then(passages => res.json(passages))
     .catch(next)}
 )
+
+// GET /api/passages/:id
+router.get('/:id', (req, res, next) => {
+  Passage.findById(req.params.id)
+    .then(passage => res.json(passage))
+    .catch(next)
+})
 
 // POST /api/passages/
 router.post('/', (req, res, next) => {

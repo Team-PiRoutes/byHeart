@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store'
-import { Menu, Button, Image } from 'semantic-ui-react'
+import { Menu, Button } from 'semantic-ui-react'
 import './Navbar.css'
 
 

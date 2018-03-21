@@ -34,17 +34,42 @@ class LineByLineTrainer extends Component {
     this.makeHarder = this.makeHarder.bind(this)
     this.startHarder = this.startHarder.bind(this)
     this.startEasier = this.startEasier.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleFinishedKey = this.handleFinishedKey.bind(this)
+    this.handleTrainingKey = this.handleTrainingKey.bind(this)
+    this.handleWaitingKey = this.handleWaitingKey.bind(this)
   }
 
   handleKeyPress(event) {
-    if (event.code === NEXT) this.nextCard()
-    else if (event.code === PREVIOUS) this.previousCard()
-    else if (event.code === HARDER) this.makeHarder()
-    else if (event.code === EASIER) this.makeEasier()
-    else if (event.code === START && this.state.status === WAITING_TO_BEGIN) this.startTraining()
-    else if (event.code === START && this.state.status === TRAINING) this.nextCard()
-    else if (event.code === MOVE && this.state.status === WAITING_TO_BEGIN) this.startTraining()
-    else if (event.code === MOVE && this.state.status === TRAINING) this.nextCard()
+    const { status } = this.state
+    const { code } = event
+    console.log('code: ', code)
+
+    if (status === WAITING_TO_BEGIN) {
+      this.handleWaitingKey(code)
+    } else if (status === TRAINING) {
+      this.handleTrainingKey(code)
+    } else if (status === FINISHED) {
+      this.handleFinishedKey(code)
+    }
+  }
+
+  handleWaitingKey(code) {
+    if (code === START) this.startTraining()
+    else if (code === MOVE) this.startTraining()
+  }
+
+  handleTrainingKey(code) {
+    if (code === NEXT) this.nextCard()
+    else if (code === PREVIOUS) this.previousCard()
+    else if (code === HARDER) this.makeHarder()
+    else if (code === EASIER) this.makeEasier()
+    else if (code === START) this.nextCard()
+    else if (code === MOVE) this.nextCard()
+  }
+
+  handleFinishedKey(code) {
+    if (code === START) this.startTraining()
   }
 
   componentDidMount() {
@@ -64,7 +89,9 @@ class LineByLineTrainer extends Component {
       timeFinished: null
     })
   }
-
+  handleInputChange = (event) => {
+    this.setState({ decimationLevel: +event.target.value })
+  }
   nextCard() {
     if (this.state.status === TRAINING) {
       const currentLineIndex = this.state.currentLineIndex + 1
@@ -138,7 +165,8 @@ class LineByLineTrainer extends Component {
     const lines = breakIntoLines(passage.content)
 
     const lineAbove = (currentLineIndex > 0) ? decimateString(lines[currentLineIndex - 1], decimationLevel) : ''
-    const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
+    // const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
+    const currentLine = lines[currentLineIndex]
     const lineBelow = (currentLineIndex < lines.length - 1) ? decimateString(lines[currentLineIndex + 1], decimationLevel) : ''
 
     switch (status) {
@@ -148,12 +176,24 @@ class LineByLineTrainer extends Component {
         )
       case TRAINING:
         return (
-          <Card
-            lineAbove={lineAbove}
-            currentLine={currentLine}
-            lineBelow={lineBelow}
-            next={this.nextCard}
-          />
+          <div>
+            <input
+              id="slideBar"
+              min={0}
+              max={10}
+              onChange={this.handleInputChange}
+              type="range"
+              value={this.state.decimationLevel}
+              ref={(input) => { this.slideBar = input }}
+            />
+            <Card
+              lineAbove={lineAbove}
+              currentLine={currentLine}
+              lineBelow={lineBelow}
+              decimationLevel={decimationLevel}
+              next={this.nextCard}
+            />
+          </div>
         )
       case FINISHED:
         return <Finished startHarder={this.startHarder} startEasier={this.startEasier} startOver={this.startTraining} time={this.state.timeFinished - this.state.timeStarted} />

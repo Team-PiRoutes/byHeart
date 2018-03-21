@@ -34,6 +34,15 @@ export const fetchPassages = () =>
         dispatch(gotPassages(passages))
       })
 
+export const fetchPassage = (id) =>
+  dispatch =>
+    axios.get(`/api/passages/${id}`)
+      .then(res => res.data)
+      .then(passage => {
+        dispatch(gotUpdatedPassage(passage))
+        dispatch(passPassage(passage))
+      })
+
 export const postPassage = (passage) =>
   dispatch =>
     axios.post('/api/passages', passage)

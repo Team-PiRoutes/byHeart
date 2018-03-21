@@ -1,8 +1,9 @@
 .lines {
-  font-size: 2em;
+  font-size: 1.85rem;
   font-family: PancakeFont, FallbackFont, sans-serif;
   color: black;
-  line-height: 1.5em;
+  line-height: 2.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .blurred {
