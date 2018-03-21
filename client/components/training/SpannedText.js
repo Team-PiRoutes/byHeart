@@ -7,9 +7,9 @@ import './SpannedText.css'
 import { relative } from 'path'
 import ReactTooltip from 'react-tooltip'
 import TipText from './TipText'
+
+
 export const SpannedText = (props) => {
-
-
   let { content, decimateLevel } = props
   let decimateLevels
   if (content !== '') {

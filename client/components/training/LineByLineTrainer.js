@@ -34,6 +34,7 @@ class LineByLineTrainer extends Component {
     this.makeHarder = this.makeHarder.bind(this)
     this.startHarder = this.startHarder.bind(this)
     this.startEasier = this.startEasier.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   handleKeyPress(event) {
@@ -64,7 +65,9 @@ class LineByLineTrainer extends Component {
       timeFinished: null
     })
   }
-
+  handleInputChange = (event) => {
+    this.setState({ decimationLevel: +event.target.value })
+  }
   nextCard() {
     if (this.state.status === TRAINING) {
       const currentLineIndex = this.state.currentLineIndex + 1
@@ -148,12 +151,23 @@ class LineByLineTrainer extends Component {
         )
       case TRAINING:
         return (
-          <Card
-            lineAbove={lineAbove}
-            currentLine={currentLine}
-            lineBelow={lineBelow}
-            next={this.nextCard}
-          />
+          <div>
+            <input
+              id="slideBar"
+              min={0}
+              max={10}
+              onChange={this.handleInputChange}
+              type="range"
+              value={this.state.decimationLevel}
+              ref={(input) => { this.slideBar = input }}
+            />
+            <Card
+              lineAbove={lineAbove}
+              currentLine={currentLine}
+              lineBelow={lineBelow}
+              next={this.nextCard}
+            />
+          </div>
         )
       case FINISHED:
         return <Finished startHarder={this.startHarder} startEasier={this.startEasier} startOver={this.startTraining} time={this.state.timeFinished - this.state.timeStarted} />
