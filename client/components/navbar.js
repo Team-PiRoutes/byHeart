@@ -26,6 +26,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Menu.Menu position="right">
         {/* The navbar will show these links after you log in */}
         <Menu.Item>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/profile">Profile</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/">Home</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/" href="#" onClick={handleClick}>Logout</Button>
         </Menu.Item>

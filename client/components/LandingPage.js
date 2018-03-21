@@ -24,7 +24,7 @@ class LandingPage extends Component {
     setInterval(() => {
       this.setState({
         indexHeart: (this.state.indexHeart + 1) % 7,
-        indexTag: (this.state.indexTag + 1) % 8
+        indexTag: (this.state.indexTag + 1) % 11
       })
     }, 1200)
   }
@@ -34,7 +34,7 @@ class LandingPage extends Component {
     const firstPassage = passages.filter(passage => passage.id === 1)
     const heartHeading = ['By Heart', 'By Hear', 'By Hea', 'By He', 'By H', 'By ', 'By ❤️']
     const str = "It doesn't have to be hard to learn your lines"
-    const tagLineTwo = decimateString(str, this.state.indexTag * 1.6)
+    const tagLineTwo = decimateString(str, this.state.indexTag)
 
     return (
       <Segment textAlign="center" style={{ minHeight: 700 }} vertical>

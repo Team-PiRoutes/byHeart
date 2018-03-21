@@ -15,7 +15,7 @@ class NewPassage extends Component {
 
   render() {
 
-    const { handleSubmit, passage, handleSave, authorId, handleUpdate } = this.props
+    const { handleSubmit, passage, handleSave, authorId, handleUpdate, handleNewPassage } = this.props
     const title = passage.title ? passage.title : ''
     const content = passage.content ? passage.content : ''
 
@@ -28,12 +28,13 @@ class NewPassage extends Component {
           <TextArea defaultValue={content} id="formContent" autoHeight style={{ minHeight: 200 }} name="passageContent" label="Passage" placeholder="Passage" />
           <div style={{ width: '100%' }}>
             <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
+            {<Button onClick={(event) => { handleNewPassage(event) }} content="Clear" floated="right" style={{ marginRight: '2%' }} />}
             {(authorId && !passage.id)
               ? <Button onClick={(event) => { handleSave(authorId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
               : null
             }
             {(passage.id && authorId && passage.authorId === authorId)
-              ? <Button onClick={(event) => {handleUpdate(passage, event)}} content="Update" floated="right" style={{ marginRight: '2%' }} />
+              ? <Button onClick={(event) => { handleUpdate(passage, event) }} content="Update" floated="right" style={{ marginRight: '2%' }} />
               : null
             }
           </div>
@@ -84,6 +85,11 @@ const mapDispatchToProps = (dispatch) => {
       if (passage.id) {
         dispatch(updatePassage(passage))
       }
+    },
+    handleNewPassage(event) {
+      event.preventDefault()
+      dispatch(gotPassage({}))
+      history.push('/newpassage')
     }
   }
 }
