@@ -161,7 +161,8 @@ class LineByLineTrainer extends Component {
     const lines = breakIntoLines(passage.content)
 
     const lineAbove = (currentLineIndex > 0) ? decimateString(lines[currentLineIndex - 1], decimationLevel) : ''
-    const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
+    // const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
+    const currentLine = lines[currentLineIndex]
     const lineBelow = (currentLineIndex < lines.length - 1) ? decimateString(lines[currentLineIndex + 1], decimationLevel) : ''
 
     switch (status) {
@@ -175,6 +176,7 @@ class LineByLineTrainer extends Component {
             lineAbove={lineAbove}
             currentLine={currentLine}
             lineBelow={lineBelow}
+            decimationLevel={decimationLevel}
             next={this.nextCard}
           />
         )
