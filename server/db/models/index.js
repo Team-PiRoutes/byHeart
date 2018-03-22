@@ -1,5 +1,6 @@
 const User = require('./user')
 const Passage = require('./passage')
+const Rehearsal = require('./rehearsal')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -17,9 +18,12 @@ const Passage = require('./passage')
 
 Passage.belongsToMany(User, { through: 'reader' })
 User.hasOne(Passage, { as: 'author' })
+Rehearsal.belongsTo(User)
+Rehearsal.hasOne(Passage)
 
 
 module.exports = {
   User,
-  Passage
+  Passage,
+  Rehearsal,
 }
