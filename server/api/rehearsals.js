@@ -3,14 +3,11 @@ const { Op } = require('sequelize')
 const { Rehearsal, Passage } = require('../db/models')
 
 router.get('/', (req, res, next) => {
-  // console.log(req.body)
+  console.log(req.query)
   return Rehearsal.findAll({
     where: {
-      [Op.and]: [
-        { userId: req.body.userId },
-        { passageId: req.body.passageId },
-        { passageUpdatedAt: req.body.passageUpdatedAt }
-      ]
+      userId: req.query.userId,
+      passageId: req.query.passageId
     }
   }).then(rehearsals => res.json(rehearsals))
     .catch(next)

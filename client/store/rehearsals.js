@@ -12,6 +12,13 @@ export const addRehearsal = (rehearsal => {
   }
 })
 
+export const gotRehearsals = (rehearsals => {
+  return {
+    type: GOT_REHEARSALS,
+    rehearsals
+  }
+})
+
 /* Thunks */
 
 export const createRehearsal = rehearsal =>
@@ -23,10 +30,21 @@ export const createRehearsal = rehearsal =>
       })
       .catch(err => console.error(err.message))
 
+export const fetchRehearsals = (userId, passageId) =>
+  dispatch =>
+    axios.get(`/api/rehearsals/?userId=${userId}&passageId=${passageId}`)
+      .then(res => res.data)
+      .then(rehearsals => {
+        dispatch(gotRehearsals(rehearsals))
+      })
+      .catch(err => console.error(err.message))
+
 /* Reducer */
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case GOT_REHEARSALS:
+      return action.rehearsals
 
     case ADD_REHEARSAL:
       return [...state, action.rehearsal]
