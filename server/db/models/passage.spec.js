@@ -15,10 +15,14 @@ describe('Passage model', () => {
       title: 'Hello World',
       content: 'Hello yee world of mine!'
     })
-      .then(passage => {
-        hello = passage
-      })
+    .then(passage => {
+      hello = passage
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
   })
+
   describe('Model assignments', () => {
     it('Defaults to not public', () => {
       expect(hello.isPublic).to.be.equal(false)
