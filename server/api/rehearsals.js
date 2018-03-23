@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Op } = require('sequelize')
+// const { Op } = require('sequelize')
 const { Rehearsal, Passage } = require('../db/models')
 
 router.get('/', (req, res, next) => {
