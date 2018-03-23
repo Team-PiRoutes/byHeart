@@ -38,4 +38,12 @@ router.put('/:id', (req, res, next) => {
     .catch(next)
 })
 
+//DELETE /api/passages/:id
+router.delete('/:id', (req, res, next) => {
+ Passage.findById(req.params.id)
+  .then(passage => passage.destroy())
+  .then(data => res.status(204).json(data))
+  .catch(next)
+})
+
 module.exports = router
