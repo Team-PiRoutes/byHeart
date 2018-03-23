@@ -1,6 +1,6 @@
 const piDigits = require('./pi-digits')
 const whiteSpace = ' \t\n'
-const excludedCharacters = '`~!@#$%^&*()-_=+[{]}\\|;:\'"“‘’”,<.>/?` \t\n'
+const excludedCharacters = '`~!@#$%^&*(—)-_=+[{]}\\|;:\'"“‘’”,<.>/?` \t\n'
 import { tokenizePassage } from './tokenize'
 const markStringForDecimation = (text) => {
   text = text.trim()
