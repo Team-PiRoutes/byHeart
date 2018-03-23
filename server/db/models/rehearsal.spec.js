@@ -14,7 +14,7 @@ describe('Rehearsal model', () => {
       expect(Rehearsal.attributes.decimationLevel).to.be.an('object')
     })
     it('should have a passageModifiedAt', () => {
-      expect(Rehearsal.attributes.passageModifiedAt).to.be.an('object')
+      expect(Rehearsal.attributes.passageUpdatedAt).to.be.an('object')
     })
   })
 

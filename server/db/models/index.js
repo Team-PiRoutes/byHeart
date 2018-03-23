@@ -19,7 +19,7 @@ const Rehearsal = require('./rehearsal')
 Passage.belongsToMany(User, { through: 'reader' })
 User.hasOne(Passage, { as: 'author' })
 Rehearsal.belongsTo(User)
-Rehearsal.hasOne(Passage)
+Rehearsal.belongsTo(Passage)
 
 
 module.exports = {

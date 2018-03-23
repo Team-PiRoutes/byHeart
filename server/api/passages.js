@@ -7,7 +7,6 @@ router.get('/', (req, res, next) => {
   const where = req.user ?
     { [Op.or]: [{authorId: req.user.id}, { isPublic: true }] } :
     { isPublic: true }
-  console.log('where: ', where)
 
   return Passage.findAll({ where })
     .then(passages => res.json(passages))

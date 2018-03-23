@@ -12,7 +12,7 @@ const Rehearsal = db.define('rehearsal', {
   decimationLevel: {
     type: Sequelize.INTEGER
   },
-  passageModifiedAt: {
+  passageUpdatedAt: {
     type: Sequelize.DATE
   },
 }, {
