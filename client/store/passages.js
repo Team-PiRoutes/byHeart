@@ -4,6 +4,7 @@ import { passPassage } from './passage'
 const GOT_PASSAGES = 'GOT_PASSAGES'
 const ADD_PASSAGE = 'ADD_PASSAGE'
 const GOT_UPDATED_PASSAGE = 'GOT_UPDATED_PASSAGE'
+const DELETE_PASSAGE = 'DELETE_PASSAGE'
 
 const initialState = []
 
@@ -22,6 +23,11 @@ export const addPassage = passage => ({
 export const gotUpdatedPassage = passage => ({
   type: GOT_UPDATED_PASSAGE,
   passage
+})
+
+export const deletePassage = id => ({
+  type: DELETE_PASSAGE,
+  id
 })
 
 /* Thunks */
@@ -62,6 +68,12 @@ export const updatePassage = (passage) =>
         dispatch(passPassage(updatedPassage))
       })
 
+export const removePassage = (id) => dispatch => {
+  dispatch(deletePassage(id))
+  axios.delete(`/api/passages/${id}`)
+    .catch(err => console.error('deleting passage went wrong', err))
+}
+
 /* Reducer */
 
 export default function (state = initialState, action) {
@@ -76,6 +88,9 @@ export default function (state = initialState, action) {
 
     case ADD_PASSAGE:
       return [...state, action.passage]
+
+    case DELETE_PASSAGE:
+      return state.filter(passage => passage.id !== action.id)
 
     default:
       return state

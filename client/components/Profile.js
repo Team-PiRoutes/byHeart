@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { gotPassage, fetchPassages } from '../store/'
-import { Card, Button, Icon, Label, Popup } from 'semantic-ui-react'
+import { gotPassage, fetchPassages, removePassage } from '../store/'
+import { Card, Button, Icon, Label, Popup, Confirm } from 'semantic-ui-react'
 import history from '../history'
 
 export class Profile extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false
+    }
+    this.show = this.show.bind(this)
+    this.handleConfirm = this.handleConfirm.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+  }
+  show = () => this.setState({ open: true })
+  handleCancel = () => this.setState({ open: false })
+  handleConfirm = () => this.setState({ open: false })
 
   componentDidMount() {
     this.props.loadInitialData()
   }
 
   render() {
-    const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage } = this.props
+    const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage, handleDeletePassage } = this.props
     const filteredPassages = passages.filter(passage => passage.authorId === user.id)
 
     return (
@@ -34,16 +46,33 @@ export class Profile extends Component {
               return (
                 <Card key={`passage-${passage.id}`} className="card" color="purple" centered>
                   <Card.Content>
-                    <Button floated="right" animated="vertical" size="mini" className="cardButton">
-                      <Button.Content hidden>Delete</Button.Content>
-                      <Button.Content visible>
-                        <Icon name="delete" size="small" />
-                      </Button.Content>
-                    </Button>
-                    <Card.Header style={{overflowWrap: 'break-word', padding: '0.5em'}}>
-                        {passage.title}
+                    <div>
+                      <Button
+                        floated="right"
+                        animated="vertical"
+                        size="mini"
+                        className="cardButton"
+                        onClick={this.show}
+                      >
+                        <Button.Content hidden>Delete</Button.Content>
+                        <Button.Content visible>
+                          <Icon name="trash" size="large" />
+                        </Button.Content>
+                      </Button>
+                      <Confirm
+                        open={this.state.open}
+                        content="Are you sure you want to delete this passage?"
+                        cancelButton="Never mind"
+                        confirmButton="Let's do it"
+                        onCancel={this.handleCancel}
+                        onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
+                        size="small"
+                      />
+                    </div>
+                    <Card.Header style={{ overflowWrap: 'break-word', padding: '0.5em' }}>
+                      {passage.title}
                     </Card.Header>
-                    <Card.Description style={{overflowWrap: 'break-word'}}>
+                    <Card.Description style={{ overflowWrap: 'break-word' }}>
                       {passage.content.slice(0, 80).concat('(...)')}
                     </Card.Description>
                   </Card.Content>
@@ -109,6 +138,10 @@ const mapDispatch = (dispatch) => {
     },
     loadInitialData() {
       dispatch(fetchPassages())
+    },
+    handleDeletePassage(id) {
+      event.preventDefault()
+      dispatch(removePassage(id))
     }
   }
 }

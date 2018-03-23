@@ -1,13 +1,13 @@
-import  { expect } from 'chai'
+import { expect } from 'chai'
 const db = require('../db')
 const Passage = db.model('passage')
-const User    = db.model('user')
+const User = db.model('user')
 const app = require('../index')
 const request = require('supertest')
 
 describe('Passage routes', () => {
   beforeEach(() => {
-    return db.sync({ force: true})
+    return db.sync({ force: true })
   })
 
   const passages = [
@@ -105,4 +105,16 @@ describe('Passage routes', () => {
     })
   })
 
+  describe('DELETE /api/passages/:id', () => {
+    beforeEach(() => Passage.bulkCreate(passages))
+
+    it('should delete a passage given the id', () => {
+      return request(app)
+        .delete('/api/passages/1')
+        .expect(204)
+        .then(res => {
+          expect(res.body.content).to.be.equal(undefined)
+        })
+    })
+  })
 })
