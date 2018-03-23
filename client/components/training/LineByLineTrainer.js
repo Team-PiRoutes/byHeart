@@ -47,7 +47,6 @@ class LineByLineTrainer extends Component {
   handleKeyPress(event) {
     const { status } = this.state
     const { code } = event
-    console.log('code: ', code)
 
     if (status === WAITING_TO_BEGIN) {
       this.handleWaitingKey(code)
@@ -91,7 +90,7 @@ class LineByLineTrainer extends Component {
       status: TRAINING,
       timeStarted: Date.now(),
       timeFinished: null,
-      isRehearsalSaved: false
+      isRehearsalSaved: !this.props.userId // prevent non-users from saving
     })
   }
   handleInputChange = (event) => {
@@ -239,7 +238,7 @@ class LineByLineTrainer extends Component {
 const mapState = state => {
   return {
     passage: state.passage,
-    userId: state.user.id,
+    userId: state.user.id
   }
 }
 
