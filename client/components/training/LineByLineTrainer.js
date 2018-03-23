@@ -8,6 +8,7 @@ import { createRehearsal } from '../../store/'
 import Card from './Card'
 import StartButton from './StartButton'
 import Finished from './Finished'
+import ProgressBar from './ProgressBar'
 
 const WAITING_TO_BEGIN = 'WAITING_TO_BEGIN'
 const TRAINING = 'TRAINING'
@@ -59,7 +60,7 @@ class LineByLineTrainer extends Component {
 
   handleWaitingKey(code) {
     if (code === START) this.startTraining()
-    else if (code === MOVE) this.startTraining()
+    //else if (code === MOVE) this.startTraining()
   }
 
   handleTrainingKey(code) {
@@ -67,7 +68,7 @@ class LineByLineTrainer extends Component {
     else if (code === PREVIOUS) this.previousCard()
     else if (code === HARDER) this.makeHarder()
     else if (code === EASIER) this.makeEasier()
-    else if (code === START) this.nextCard()
+    else if (code === START) this.startTraining()
     else if (code === MOVE) this.nextCard()
   }
 
@@ -183,30 +184,25 @@ class LineByLineTrainer extends Component {
     const { passage } = this.props
 
     const lines = breakIntoLines(passage.content)
-
     const lineAbove = (currentLineIndex > 0) ? decimateString(lines[currentLineIndex - 1], decimationLevel) : ''
     // const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
     const currentLine = lines[currentLineIndex]
     const lineBelow = (currentLineIndex < lines.length - 1) ? decimateString(lines[currentLineIndex + 1], decimationLevel) : ''
 
+
     switch (status) {
       case WAITING_TO_BEGIN:
         return (
-          <StartButton click={this.startTraining} />
+          <div>
+            <StartButton click={this.startTraining} handleInputChange={this.handleInputChange} decimationLevel={this.state.decimationLevel} input={(input) => { this.slideBar = input }} />
+          </div>
         )
       case TRAINING:
         return (
           <div>
-            <input
-              id="slideBar"
-              min={0}
-              max={10}
-              onChange={this.handleInputChange}
-              type="range"
-              value={this.state.decimationLevel}
-              ref={(input) => { this.slideBar = input }}
-            />
+            <ProgressBar lines={lines} currentLineIndex={currentLineIndex} />
             <Card
+              startOver={this.startTraining}
               lineAbove={lineAbove}
               currentLine={currentLine}
               lineBelow={lineBelow}
