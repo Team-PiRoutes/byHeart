@@ -56,7 +56,7 @@ class LineByLineTrainer extends Component {
 
   handleWaitingKey(code) {
     if (code === START) this.startTraining()
-    else if (code === MOVE) this.startTraining()
+    //else if (code === MOVE) this.startTraining()
   }
 
   handleTrainingKey(code) {
@@ -64,7 +64,7 @@ class LineByLineTrainer extends Component {
     else if (code === PREVIOUS) this.previousCard()
     else if (code === HARDER) this.makeHarder()
     else if (code === EASIER) this.makeEasier()
-    else if (code === START) this.nextCard()
+    else if (code === START) this.startTraining()
     else if (code === MOVE) this.nextCard()
   }
 

@@ -35,7 +35,7 @@ function individualWordHint(hintArray, level) {
     )
   }
   for (let i = level - 1; i > 0; i--) {
-    console.log('current', current, '  hintArray[level]', hintArray[i], 'word ', hintArray[0])
+   // console.log('current', current, '  hintArray[level]', hintArray[i], 'word ', hintArray[0])
     if (current !== hintArray[i]) {
       return ({
         hintLevel: i, hint: hintArray[i]
