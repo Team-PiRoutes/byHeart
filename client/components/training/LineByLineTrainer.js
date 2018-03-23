@@ -187,6 +187,7 @@ class LineByLineTrainer extends Component {
               ref={(input) => { this.slideBar = input }}
             />
             <Card
+              startOver={this.startTraining}
               lineAbove={lineAbove}
               currentLine={currentLine}
               lineBelow={lineBelow}

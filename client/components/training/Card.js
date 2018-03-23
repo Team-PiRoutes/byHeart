@@ -1,9 +1,12 @@
 import React from 'react'
+import { Button } from 'semantic-ui-react'
 import SpannedText from './SpannedText'
 import './Card.css'
 
 const Card = (props) => {
-  const { lineAbove, currentLine, lineBelow, next, decimationLevel } = props
+
+  const { lineAbove, currentLine, lineBelow, next, decimationLevel, startOver } = props
+
   return (
     <div className="card">
       <div id="line-above" className="lines blurred">{lineAbove}</div>
@@ -12,7 +15,11 @@ const Card = (props) => {
       </div>
       <div id="line-below" className="lines blurred">{lineBelow}</div>
       <div className="button-wrapper">
-        <button className="button-next" onClick={next}>Next</button>
+        <Button.Group>
+          <Button onClick={startOver} style={{ marginLeft: '0.5em' }}>Start Over</Button>
+          <Button.Or />
+          <Button onClick={next} style={{ marginLeft: '0.5em' }}>Next</Button>
+        </Button.Group>
       </div>
     </div>
   )
