@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { wordHint } from '../../utils/wordHint'
 import { buildDecimationLevelArrays } from '../../utils/decimate'
 import './SpannedText.css'
-import { relative } from 'path'
-import ReactTooltip from 'react-tooltip'
 import TipText from './TipText'
 
 

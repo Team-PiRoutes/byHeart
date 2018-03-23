@@ -25,7 +25,7 @@ class TipText extends React.Component {
     })
   }
 
-  handleMouseEnter(e) {
+  handleMouseEnter() {
     this.setState({
       hover: true
     })
@@ -33,7 +33,7 @@ class TipText extends React.Component {
   }
 
 
-  handleMouseOut(e) {
+  handleMouseOut() {
     clearInterval(this.intervalId)
     this.setState({
       hover: false,

@@ -1,12 +1,3 @@
-function spannifyGrid(arrayOfArrays) {
-  return arrayOfArrays.map((arr) => {
-    return arr.map((str, i) => {
-      return `<span id="${i}">${str} </span>`
-    })
-  })
-}
-
-
 function wordHint(decimatedCollection, level, index) { // we can change what is fed in.
   //level is integer representing current decimation level
   // index is the index of the word in that array.
