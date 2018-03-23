@@ -5,11 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import passages from './passages'
 import passage from './passage'
+import rehearsals from './rehearsals'
 
 const reducer = combineReducers({
   user,
   passages,
-  passage
+  passage,
+  rehearsals
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -22,3 +24,4 @@ export default store
 export * from './user'
 export * from './passages'
 export * from './passage'
+export * from './rehearsals'

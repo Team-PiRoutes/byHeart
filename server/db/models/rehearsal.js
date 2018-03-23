@@ -4,10 +4,10 @@ const db = require('../db')
 
 const Rehearsal = db.define('rehearsal', {
   startTime: { // milliseconds
-    type: Sequelize.INTEGER
+    type: Sequelize.BIGINT
   },
   endTime: { // milliseconds
-    type: Sequelize.INTEGER
+    type: Sequelize.BIGINT
   },
   decimationLevel: {
     type: Sequelize.INTEGER

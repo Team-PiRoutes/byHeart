@@ -3,6 +3,7 @@ import { Button, Icon, Label, Segment, Popup } from 'semantic-ui-react'
 import timer from '../../utils/timer'
 
 const Finished = (props) => {
+  const { saveRehearsal, isRehearsalSaved } = props
 
   let time = timer(props.time)
 
@@ -14,12 +15,15 @@ const Finished = (props) => {
             <Label basic pointing="right" size="big" color="purple">
               <Icon name="time" /> {time}
             </Label>
-            <Button animated="vertical" color="purple">
-              <Button.Content hidden>Save</Button.Content>
-              <Button.Content visible>
-                <Icon name="save" />
-              </Button.Content>
-            </Button>
+            { !isRehearsalSaved ?
+                  (<Button onClick={saveRehearsal} animated="vertical" color="purple">
+                    <Button.Content hidden>Save</Button.Content>
+                    <Button.Content visible>
+                      <Icon name="save" />
+                    </Button.Content>
+                  </Button>)
+                : null
+            }
           </Button>
         }
         content="This is how long it took you to read your lines."
