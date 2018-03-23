@@ -10,9 +10,17 @@ const Finished = (props) => {
     <Segment clearing>
       <Popup
         trigger={
-          <Label basic color="purple" size="big">
-            <Icon name="time" /> {time}
-          </Label>
+          <Button as="div" labelPosition="left">
+            <Label basic pointing="right" size="big" color="purple">
+              <Icon name="time" /> {time}
+            </Label>
+            <Button animated="vertical" color="purple">
+              <Button.Content hidden>Save</Button.Content>
+              <Button.Content visible>
+                <Icon name="save" />
+              </Button.Content>
+            </Button>
+          </Button>
         }
         content="This is how long it took you to read your lines."
         on="hover"
@@ -30,13 +38,13 @@ const Finished = (props) => {
       <Popup
         trigger={
           <Button
-          icon
-          labelPosition="right"
-          onClick={props.startHarder}
-          floated="right"
-          style={{ marginLeft: '0.5em' }}>
-          <Icon name="plus" />
-          Make Harder
+            icon
+            labelPosition="right"
+            onClick={props.startHarder}
+            floated="right"
+            style={{ marginLeft: '0.5em' }}>
+            <Icon name="plus" />
+            Make Harder
           </Button>
         }
         content="Makes letters disappear from your lines. You can also control the level of difficulty with 'up' and 'down' keys."
@@ -47,13 +55,13 @@ const Finished = (props) => {
       <Popup
         trigger={
           <Button
-          icon
-          labelPosition="left"
-          onClick={props.startEasier}
-          floated="right"
-          style={{ marginLeft: '0.5em' }}>
-          <Icon name="minus" />
-          Make Easier
+            icon
+            labelPosition="left"
+            onClick={props.startEasier}
+            floated="right"
+            style={{ marginLeft: '0.5em' }}>
+            <Icon name="minus" />
+            Make Easier
           </Button>
         }
         content="Was it too difficult this time? Click to add back some letters to your lines."
