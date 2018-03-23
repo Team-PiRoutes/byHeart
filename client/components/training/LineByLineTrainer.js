@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import './LineByLineTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { breakIntoLines } from '../../utils/text-to-lines'
+import { createRehearsal } from '../../store/'
+
 import Card from './Card'
 import StartButton from './StartButton'
 import Finished from './Finished'
@@ -26,7 +28,8 @@ class LineByLineTrainer extends Component {
       status: WAITING_TO_BEGIN,
       timeStarted: null,
       timeFinished: null,
-      lastKeyPressed: null
+      lastKeyPressed: null,
+      isRehearsalSaved: false
     }
     this.startTraining = this.startTraining.bind(this)
     this.nextCard = this.nextCard.bind(this)
@@ -38,12 +41,12 @@ class LineByLineTrainer extends Component {
     this.handleFinishedKey = this.handleFinishedKey.bind(this)
     this.handleTrainingKey = this.handleTrainingKey.bind(this)
     this.handleWaitingKey = this.handleWaitingKey.bind(this)
+    this.saveRehearsal = this.saveRehearsal.bind(this)
   }
 
   handleKeyPress(event) {
     const { status } = this.state
     const { code } = event
-    console.log('code: ', code)
 
     if (status === WAITING_TO_BEGIN) {
       this.handleWaitingKey(code)
@@ -86,7 +89,8 @@ class LineByLineTrainer extends Component {
       currentLineIndex: 0,
       status: TRAINING,
       timeStarted: Date.now(),
-      timeFinished: null
+      timeFinished: null,
+      isRehearsalSaved: !this.props.userId // prevent non-users from saving
     })
   }
   handleInputChange = (event) => {
@@ -158,8 +162,24 @@ class LineByLineTrainer extends Component {
     }, 1)
   }
 
+  saveRehearsal() {
+    const rehearsal = {
+      userId: this.props.userId,
+      passageId: this.props.passage.id,
+      startTime: this.state.timeStarted,
+      endTime: this.state.timeFinished,
+      decimationLevel: this.state.decimationLevel,
+      passageUpdatedAt: this.props.passage.updatedAt
+    }
+
+    if (rehearsal.userId && !this.state.isRehearsalSaved) {
+      this.setState({ isRehearsalSaved: true })
+      this.props.createRehearsal(rehearsal)
+    }
+  }
+
   render() {
-    const { decimationLevel, currentLineIndex, status } = this.state
+    const { decimationLevel, currentLineIndex, status, isRehearsalSaved } = this.state
     const { passage } = this.props
 
     const lines = breakIntoLines(passage.content)
@@ -196,7 +216,16 @@ class LineByLineTrainer extends Component {
           </div>
         )
       case FINISHED:
-        return <Finished startHarder={this.startHarder} startEasier={this.startEasier} startOver={this.startTraining} time={this.state.timeFinished - this.state.timeStarted} />
+        return (
+          <Finished
+            startHarder={this.startHarder}
+            startEasier={this.startEasier}
+            startOver={this.startTraining}
+            time={this.state.timeFinished - this.state.timeStarted}
+            saveRehearsal={this.saveRehearsal}
+            isRehearsalSaved={isRehearsalSaved}
+          />
+        )
       default:
         return <div>Something went wrong</div>
     }
@@ -208,8 +237,17 @@ class LineByLineTrainer extends Component {
  */
 const mapState = state => {
   return {
-    passage: state.passage
+    passage: state.passage,
+    userId: state.user.id
   }
 }
 
-export default connect(mapState)(LineByLineTrainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createRehearsal(rehearsal) {
+      dispatch(createRehearsal(rehearsal))
+    },
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(LineByLineTrainer)

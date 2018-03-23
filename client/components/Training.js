@@ -18,11 +18,11 @@ const handleBackClick = (props) => {
 
 export class Training extends Component {
 
-  componentWillMount() {
-    const { match, loadInitialData, content } = this.props
+  componentDidMount() {
+    const { match, loadInitialData, content, userId } = this.props
 
     if (match && match.params.id && !content) {
-      loadInitialData(match.params.id)
+      loadInitialData(match.params.id, userId)
     } else if (!content) {
       history.push('/passages/new')
     }
@@ -68,7 +68,8 @@ const mapState = state => {
     passage: state.passage,
     title: state.passage.title,
     content: state.passage.content,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id
   }
 }
 
