@@ -3,7 +3,7 @@ const { Op } = require('sequelize')
 const { Rehearsal, Passage } = require('../db/models')
 
 router.get('/', (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   return Rehearsal.findAll({
     where: {
       [Op.and]: [
@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   return Passage.findById(req.body.passageId)
     .then(passage => {
       return Rehearsal.create({
