@@ -100,21 +100,21 @@ class PassageForm extends Component {
             label="Passage"
             placeholder="Passage"
           />
-          <div style={{ width: '100%' }}>
-            <Button type="submit" content="Start" floated="right" style={{ marginRight: '2%' }} />
+          <div style={{ width: '100%', padding: '1em' }}>
+            <Button type="submit" content="Start" floated="right" style={{ marginLeft: '0.5em' }} />
             {(title !== '' || content !== '') ?
             <Button
               onClick={(event) => { this.handleClearButton(event) }}
               content="Clear"
               floated="right"
-              style={{ marginRight: '2%' }}
+              style={{ marginLeft: '0.5em' }}
             /> : null }
             {(userId && !passage.id)
-              ? <Button onClick={(event) => { handleSave(userId, passage, event) }} content="Save" floated="right" style={{ marginRight: '2%' }} />
+              ? <Button onClick={(event) => { handleSave(userId, passage, event) }} content="Save" floated="right" style={{ marginLeft: '0.5em' }} />
               : null
             }
             {(passage.id && userId && passage.authorId === userId)
-              ? <Button onClick={(event) => { handleUpdate(passage, event) }} content="Update" floated="right" style={{ marginRight: '2%' }} />
+              ? <Button onClick={(event) => { handleUpdate(passage, event) }} content="Update" floated="right" style={{ marginLeft: '0.5em' }} />
               : null
             }
           </div>
