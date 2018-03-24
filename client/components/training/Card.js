@@ -5,13 +5,13 @@ import './Card.css'
 
 const Card = (props) => {
 
-  const { lineAbove, currentLine, lineBelow, next, decimationLevel, startOver } = props
+  const { lineAbove, currentLine, lineBelow, next, decimationLevel, startOver, hideHardSpace } = props
 
   return (
     <div className="card">
       <div id="line-above" className="lines blurred">{lineAbove}</div>
       <div id="current-line" className="lines">
-        <SpannedText content={currentLine} decimateLevel={decimationLevel} />
+        <SpannedText content={currentLine} decimateLevel={decimationLevel} hideHardSpace={hideHardSpace} />
       </div>
       <div id="line-below" className="lines blurred">{lineBelow}</div>
       <div className="button-wrapper">

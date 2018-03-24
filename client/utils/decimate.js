@@ -48,11 +48,11 @@ const decimateString = (text, rate = 10, hideHardSpace = false) => {
   return decimatedText
 }
 
-function buildDecimationLevelArrays(stringPassage, levels = 10) {
+function buildDecimationLevelArrays(stringPassage, levels = 10, hideHardSpace) {
 
   const decimatedArrays = [tokenizePassage(stringPassage)]
   for (let i = 1; i <= levels; i++) {
-    decimatedArrays.push(tokenizePassage(decimateString(stringPassage, i)))
+    decimatedArrays.push(tokenizePassage(decimateString(stringPassage, i, hideHardSpace)))
   }
   return decimatedArrays
 }
