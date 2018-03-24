@@ -43,3 +43,7 @@ h1 {
   background-color: #e0e1e2;
   padding: 2em;
 }
+
+.checkbox-spaces {
+  margin-left: 1rem;
+}

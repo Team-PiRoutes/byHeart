@@ -9,7 +9,7 @@ class PassageTraining extends Component {
     super(props)
     this.state = {
       decimateLevel: 0,
-      hideHardSpace: true
+      hideHardSpace: false
     }
   }
 
@@ -60,12 +60,16 @@ class PassageTraining extends Component {
                 value={this.state.decimateLevel}
                 ref={(input) => { this.slideBar = input }}
               />
-              <Checkbox label="No space?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
+              <Checkbox className="checkbox-spaces" label="No spaces?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
             </div>
           </Sticky>
 
           <div className="passageTextContainer">
-            <TextWithLineBreaks text={content} decimateLevel={this.state.decimateLevel} />
+            <TextWithLineBreaks
+              text={content}
+              decimateLevel={this.state.decimateLevel}
+              hideHardSpace={this.state.hideHardSpace}
+            />
           </div>
         </div>
       </div>

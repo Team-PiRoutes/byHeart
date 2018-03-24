@@ -6,10 +6,10 @@ import TipText from './TipText'
 
 
 export const SpannedText = (props) => {
-  let { content, decimateLevel } = props
+  let { content, decimateLevel, hideHardSpace } = props
   let decimateLevels
   if (content !== '') {
-    decimateLevels = buildDecimationLevelArrays(content)
+    decimateLevels = buildDecimationLevelArrays(content, 10, hideHardSpace)
 
   }
 
