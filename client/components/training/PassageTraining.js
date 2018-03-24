@@ -4,6 +4,9 @@ import { Sticky, Checkbox } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import TextWithLineBreaks from './TextWithLineBreaks'
 
+const HARDER = 'ArrowRight'
+const EASIER = 'ArrowLeft'
+
 class PassageTraining extends Component {
   constructor(props) {
     super(props)
@@ -11,19 +14,55 @@ class PassageTraining extends Component {
       decimateLevel: 0,
       hideHardSpace: false
     }
+    this.makeEasier = this.makeEasier.bind(this)
+    this.makeHarder = this.makeHarder.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+  }
+
+  // componentDidMount() {
+  //   this.slideBar.focus()
+  // }
+
+  makeEasier() {
+    const decimateLevel = this.state.decimateLevel
+    if (decimateLevel > 0) {
+      this.setState({
+        decimateLevel: decimateLevel - 1
+      })
+    }
+  }
+
+  makeHarder() {
+    const decimateLevel = this.state.decimateLevel
+    if (decimateLevel < 10) {
+      this.setState({
+        decimateLevel: decimateLevel + 1
+      })
+    }
+  }
+
+  handleKeyPress(event) {
+    console.log('event: ', event.code)
+    console.log('this.makeHarder: ', this.makeHarder)
+    if (event.code === HARDER) this.makeHarder()
+    else if (event.code === EASIER) this.makeEasier()
   }
 
   componentDidMount() {
-    this.slideBar.focus()
+    window.addEventListener('keydown', this.handleKeyPress, true)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyPress, true)
   }
 
   handleContextRef = contextRef => {
     this.setState({ contextRef })
   }
+
   handleInputChange = (event) => {
     this.setState({ decimateLevel: +event.target.value })
   }
-
 
   handlePaginationChange = (event, { decimateLevel }) => this.setState({ decimateLevel })
 
@@ -32,7 +71,7 @@ class PassageTraining extends Component {
       ...this.state,
       hideHardSpace: !this.state.hideHardSpace
     })
-    this.slideBar.focus()
+    // this.slideBar.focus()
   }
 
   render() {
