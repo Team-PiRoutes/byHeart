@@ -39,8 +39,7 @@ export class Training extends Component {
             <PassageTraining />
           </Tab.Pane>)
       },
-      { menuItem: 'Lines', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> }, // eslint-disable-line
-      { menuItem: 'Quiz', render: () => <Tab.Pane key="3">Check back soon!</Tab.Pane> }, // eslint-disable-line
+      { menuItem: 'Lines', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> } // eslint-disable-line
     ]
     return (
       <div id="training-page">
