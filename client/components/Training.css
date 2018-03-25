@@ -16,3 +16,11 @@
 #training-page {
   position: relative;
 }
+
+.question {
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  right: 4rem;
+  z-index: 10;
+}

@@ -75,7 +75,7 @@ class LineByLineTrainer extends Component {
   }
 
   handleFinishedKey(code) {
-    if (code === START) this.startTraining()
+    if (code === START) this.startOver()
   }
 
   componentDidMount() {
