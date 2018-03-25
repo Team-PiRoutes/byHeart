@@ -43,3 +43,11 @@ h1 {
   background-color: #e0e1e2;
   padding: 2em;
 }
+
+#card:hover #extraContent {
+  display: block
+}
+
+#extraContent {
+  display: none
+}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages, removePassage } from '../store/'
-import { Card, Button, Icon, Label, Popup, Confirm } from 'semantic-ui-react'
+import { Card, Button, Icon, Label, Popup, Confirm, Reveal, Container, Image } from 'semantic-ui-react'
 import history from '../history'
 
 export class Profile extends Component {
@@ -44,7 +44,7 @@ export class Profile extends Component {
             </Card>
             {filteredPassages && filteredPassages.map(passage => {
               return (
-                <Card key={`passage-${passage.id}`} className="card" color="purple" centered>
+                <Card key={`passage-${passage.id}`} id="card" className="card" color="purple" raised centered>
                   <Card.Content>
                     <div>
                       <Button
@@ -76,33 +76,33 @@ export class Profile extends Component {
                       {passage.content.slice(0, 80).concat('(...)')}
                     </Card.Description>
                   </Card.Content>
-                  <Card.Content extra>
-                    <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleTrainPassage(passage) }}>
-                      <Button.Content hidden>Train</Button.Content>
-                      <Button.Content visible>
-                        <Icon name="file text outline" size="large" />
-                      </Button.Content>
-                    </Button>
-                    <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleEditPassage(passage) }}>
-                      <Button.Content hidden>Edit</Button.Content>
-                      <Button.Content visible>
-                        <Icon name="edit" size="large" />
-                      </Button.Content>
-                    </Button>
-                    <Popup
-                      trigger={
-                        <Button as="div" size="mini" floated="right" labelPosition="right">
-                          <Button color="purple">
-                            <Icon name="clock" size="large" />
-                          </Button>
-                          <Label as="a" basic color="purple" pointing="left">00:00:08:4</Label>
+                  <Card.Content id="extraContent" extra>
+                        <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleTrainPassage(passage) }}>
+                          <Button.Content hidden>Train</Button.Content>
+                          <Button.Content visible>
+                            <Icon name="file text outline" size="large" />
+                          </Button.Content>
                         </Button>
-                      }
-                      content="Last time you read this passage in this amount of time"
-                      position="bottom center"
-                      on="hover"
-                      inverted
-                    />
+                        <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleEditPassage(passage) }}>
+                          <Button.Content hidden>Edit</Button.Content>
+                          <Button.Content visible>
+                            <Icon name="edit" size="large" />
+                          </Button.Content>
+                        </Button>
+                        <Popup
+                          trigger={
+                            <Button as="div" size="mini" floated="right" labelPosition="right">
+                              <Button color="purple">
+                                <Icon name="clock" size="large" />
+                              </Button>
+                              <Label as="a" basic color="purple" pointing="left">00:00:08:4</Label>
+                            </Button>
+                          }
+                          content="Last time you read this passage in this amount of time"
+                          position="bottom center"
+                          on="hover"
+                          inverted
+                        />
                   </Card.Content>
                 </Card>
               )
