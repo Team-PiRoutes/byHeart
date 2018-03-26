@@ -66,7 +66,7 @@ class GraphLargeView extends React.Component {
     console.log('chart(data) data', data)
     for (let i = 0; i < data.length; i++) {
       // makes x match graph position
-      data[i].x = i / eslint - disable - line id - length
+      data[i].x = i // eslint-disable-line id-length
       xTicksRange.push(i)
     }
 
