@@ -9,7 +9,7 @@ import './Navbar.css'
 
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <Menu borderless className="navbar" fixed="top">
+  <Menu borderless stackable className="navbar" fixed="top">
     <Menu.Menu>
       {/*<Menu.Item as="a" header>
         <Image

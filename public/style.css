@@ -2,7 +2,9 @@ body {
   font-family: PancakeFont, FallbackFont, sans-serif;
   font-size: 1em;
   background-color: #F5F5F5;
-  padding-top: 70px
+  padding-top: 70px;
+  height: 100%;
+  position: relative;
 }
 
 a {
@@ -57,4 +59,23 @@ h1 {
 }
 .checkbox-spaces {
   margin-left: 1rem;
+}
+
+#landing-cards{
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  height: 270px;
+  padding-bottom: 20px;
+}
+
+#landing-cards:hover .card-landing{
+  background-color: #f9f2fc;
+}
+
+.description {
+  padding-bottom: 0.5em;
 }

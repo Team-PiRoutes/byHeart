@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { gotPassage } from '../store/passage'
 import history from '../history'
-import { Button, Container, Header, Grid, Segment, Card } from 'semantic-ui-react'
+import { Button, Container, Header, Card, Image } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
 import './LandingPage.css'
 
@@ -11,13 +11,13 @@ const card1 = [
   'Read full text at once or line-by-line',
 ]
 const card2 = [
-  'Easily switch between 10 difficulty levels',
+  'Letters disappear from your text depending on chosen difficulty level',
 ]
 const card3 = [
-  'Edit and save your passages',
+  'Edit, save or delete your passages',
 ]
 const card4 = [
-  'Never forget your lines again! ',
+  'Get hints when you are stuck',
 ]
 
 class LandingPage extends Component {
@@ -46,62 +46,54 @@ class LandingPage extends Component {
     const tagLineTwo = decimateString(str, this.state.indexTag)
 
     return (
-      <Segment textAlign="center" style={{ minHeight: 700 }} vertical>
-        <Grid>
-          <Grid.Row>
-            <Container text id="landing">
-              <Header
-                id="tagLine"
-                as="h2"
-                content={tagLineTwo}
-              />
-              <Header
-                id="heartHeader"
-                as="h1"
-                content={heartHeading[this.state.indexHeart]}
-              />
-              <Button.Group style={{ marginBottom: '1em' }}>
-                <Button onClick={handleStartPassage} basic color="purple">Get Started</Button>
-                <Button.Or />
-                {
-                  firstPassage ?
-                  <Button onClick={() => { handleTrainPassage(firstPassage[0]) }} basic color="purple">Try An Example</Button>
-                  : null
-                }
-              </Button.Group>
-            </Container>
-          </Grid.Row>
-
-          <Grid.Row style={{ padding: '0.5em', marginTop: '4em' }}>
-            <Grid columns={3}>
-              <Grid.Column width={4}>
-                <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="LEARN" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card1} />
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="IT" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card2} />
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="BY" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card3} />
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <Card color="purple" style={{ minHeight: 120, fontSize: '1.3em' }}>
-                  <Card.Content header="HEART" style={{ fontSize: '0.7em' }} />
-                  <Card.Content description={card4} />
-                </Card>
-              </Grid.Column>
-            </Grid>
-          </Grid.Row>
-        </Grid>
-      </Segment>
+      <Container text id="landing" textAlign="center" style={{ height: 100 }} vertical="true">
+        <Header
+          id="tagLine"
+          as="h2"
+          content={tagLineTwo}
+        />
+        <Header
+          id="heartHeader"
+          as="h1"
+          content={heartHeading[this.state.indexHeart]}
+        />
+        <Button.Group style={{ marginBottom: '1em' }}>
+          <Button onClick={handleStartPassage} basic color="purple">Get Started</Button>
+          <Button.Or />
+          {
+            firstPassage ?
+              <Button onClick={() => { handleTrainPassage(firstPassage[0]) }} basic color="purple">Try An Example</Button>
+              : null
+          }
+        </Button.Group>
+        <Card.Group id="landing-cards" itemsPerRow={4}>
+          <Card className="card-landing" color="purple">
+            <Card.Content>
+              <Card.Header>LEARN</Card.Header>
+              <Card.Description>{card1}</Card.Description>
+            </Card.Content>
+          </Card>
+          <Card className="card-landing" color="purple">
+            <Card.Content>
+              <Card.Header>IT</Card.Header>
+              <Card.Description>{card2}</Card.Description>
+              <Image src="decimation.gif" />
+            </Card.Content>
+          </Card>
+          <Card className="card-landing" color="purple">
+            <Card.Content>
+              <Card.Header>BY</Card.Header>
+              <Card.Description>{card3}</Card.Description>
+            </Card.Content>
+          </Card>
+          <Card className="card-landing" color="purple">
+            <Card.Content>
+              <Card.Header>HEART</Card.Header>
+              <Card.Description>{card4}</Card.Description>
+            </Card.Content>
+          </Card>
+        </Card.Group>
+      </Container>
     )
   }
 }

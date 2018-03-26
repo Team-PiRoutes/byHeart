@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchRehearsals } from '../../store'
 import { Button, Icon, Label, Segment, Popup } from 'semantic-ui-react'
 import timer from '../../utils/timer'
+import DifficultyLabel from './DifficultyLabel'
 
 class Finished extends Component {
   componentDidMount() {
@@ -11,7 +12,7 @@ class Finished extends Component {
   }
 
   render() {
-    const { saveRehearsal, isRehearsalSaved, rehearsals, userId, passage } = this.props
+    const { saveRehearsal, isRehearsalSaved, rehearsals, userId, passage, decimationLevel } = this.props
 
     let time = timer(this.props.time)
 
@@ -24,14 +25,14 @@ class Finished extends Component {
                 <Label basic pointing="right" size="big" color="purple">
                   <Icon name="time" /> {time}
                 </Label>
-                { (!isRehearsalSaved && userId && passage.id ) ?
-                      (<Button onClick={saveRehearsal} animated="vertical" color="purple">
-                        <Button.Content hidden>Save</Button.Content>
-                        <Button.Content visible>
-                          <Icon name="save" />
-                        </Button.Content>
-                      </Button>)
-                    : null
+                {(!isRehearsalSaved && userId && passage.id) ?
+                  (<Button onClick={saveRehearsal} animated="vertical" color="purple">
+                    <Button.Content hidden>Save</Button.Content>
+                    <Button.Content visible>
+                      <Icon name="save" />
+                    </Button.Content>
+                  </Button>)
+                  : null
                 }
               </Button>
             }
@@ -49,6 +50,7 @@ class Finished extends Component {
             inverted
           />
         </Segment>
+        <DifficultyLabel decimateLevel={decimationLevel} />
         <ul>
           {rehearsals && rehearsals.map(rehearsal => {
             return (

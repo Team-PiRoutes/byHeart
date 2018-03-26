@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Sticky, Checkbox } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import TextWithLineBreaks from './TextWithLineBreaks'
+import DifficultyLabel from './DifficultyLabel'
 
 const HARDER = 'ArrowRight'
 const EASIER = 'ArrowLeft'
@@ -101,6 +102,7 @@ class PassageTraining extends Component {
               />
               <Checkbox className="checkbox-spaces" label="No spaces?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
             </div>
+            <DifficultyLabel decimateLevel={this.state.decimateLevel} />
           </Sticky>
 
           <div className="passageTextContainer">
