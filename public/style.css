@@ -44,6 +44,17 @@ h1 {
   padding: 2em;
 }
 
+#card:hover #extraContent {
+  display: block;
+}
+
+#extraContent {
+  display: none;
+}
+
+#card {
+  min-height: 167.41px;
+}
 .checkbox-spaces {
   margin-left: 1rem;
 }
