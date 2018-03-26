@@ -36,12 +36,12 @@ export class Training extends Component {
       <Tab.Pain> <Component /></Tab.Pain> see tab 2 button example.
       */
       {
-        menuItem: 'Passage', render: () => ( // eslint-disable-line
+        menuItem: 'Train Full Passage', render: () => ( // eslint-disable-line
           <Tab.Pane key="1">
             <PassageTraining />
           </Tab.Pane>)
       },
-      { menuItem: 'Lines', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> } // eslint-disable-line
+      { menuItem: 'Train Line By Line', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> } // eslint-disable-line
     ]
     return (
       <div id="training-page">
