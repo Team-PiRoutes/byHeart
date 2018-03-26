@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { gotPassage } from '../store/passage'
 import history from '../history'
-import { Button, Container, Header, Card } from 'semantic-ui-react'
+import { Button, Container, Header, Card, Image } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
 import './LandingPage.css'
 
@@ -76,6 +76,7 @@ class LandingPage extends Component {
           <Card color="purple">
             <Card.Content>
               <Card.Header>IT</Card.Header>
+              <Image src="" />
               <Card.Description>{card2}</Card.Description>
             </Card.Content>
           </Card>

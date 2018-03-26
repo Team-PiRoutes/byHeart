@@ -53,4 +53,9 @@ h1 {
 #landing-cards{
   position: absolute;
   bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  height: 250px
 }
