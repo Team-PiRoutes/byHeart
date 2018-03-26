@@ -89,7 +89,7 @@ class PassageTraining extends Component {
     return (
       <div className="container">
         <div id="stickyZone" ref={this.handleContextRef}>
-          <Sticky context={contextRef} >
+          <Sticky context={contextRef} id="slidebarWrapper" >
             <div className="decimate">
               <input
                 id="slideBar"
