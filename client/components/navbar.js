@@ -26,6 +26,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Menu.Menu position="right">
         {/* The navbar will show these links after you log in */}
         <Menu.Item>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages/new">New</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages">Browse</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/profile">Profile</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/">Home</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/" href="#" onClick={handleClick}>Logout</Button>
@@ -35,6 +37,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Menu.Menu position="right">
         {/* The navbar will show these links before you log in */}
         <Menu.Item>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages/new">New</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages">Browse</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/">Home</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/login">Login</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/signup">Sign Up</Button>
         </Menu.Item>

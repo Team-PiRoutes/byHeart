@@ -21,7 +21,7 @@ export class Training extends Component {
   componentDidMount() {
     const { match, loadInitialData, content, userId } = this.props
 
-    if (match && match.params.id && !content) {
+    if (match && match.params.id && (!content || match.params.id !== this.props.passage.id)) {
       loadInitialData(match.params.id, userId)
     } else if (!content) {
       history.push('/passages/new')
