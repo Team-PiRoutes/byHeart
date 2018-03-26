@@ -48,40 +48,6 @@ class Finished extends Component {
             position="bottom right"
             inverted
           />
-          <Popup
-            trigger={
-              <Button
-                icon
-                labelPosition="right"
-                onClick={this.props.startHarder}
-                floated="right"
-                style={{ marginLeft: '0.5em' }}>
-                <Icon name="plus" />
-                Make Harder
-              </Button>
-            }
-            content="Makes letters disappear from your lines. You can also control the level of difficulty with 'up' and 'down' keys."
-            on="hover"
-            position="bottom center"
-            inverted
-          />
-          <Popup
-            trigger={
-              <Button
-                icon
-                labelPosition="left"
-                onClick={this.props.startEasier}
-                floated="right"
-                style={{ marginLeft: '0.5em' }}>
-                <Icon name="minus" />
-                Make Easier
-              </Button>
-            }
-            content="Was it too difficult this time? Click to add back some letters to your lines."
-            on="hover"
-            position="bottom center"
-            inverted
-          />
         </Segment>
         <ul>
           {rehearsals && rehearsals.map(rehearsal => {
