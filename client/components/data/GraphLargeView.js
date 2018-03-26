@@ -63,7 +63,6 @@ class GraphLargeView extends React.Component {
   }
   chart(data) {
     let xTicksRange = []
-    console.log('chart(data) data', data)
     for (let i = 0; i < data.length; i++) {
       // makes x match graph position
       data[i].x = i // eslint-disable-line id-length
@@ -112,7 +111,6 @@ class GraphLargeView extends React.Component {
 
     return (
       <div style={this.containerStyle} onMouseLeave={this.mouseLeaveChart}>
-        <h3>GraphLargeView - remove after complete</h3>
         {
           <div style={this.timeDisplayStyle}> {
             this.state.time === null ?

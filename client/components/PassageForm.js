@@ -19,13 +19,18 @@ class PassageForm extends Component {
   }
 
   componentWillMount() {
-    if (this.props.match.path === '/passages/:id/edit') {
-      if (this.props.match.params.id) {
-        this.props.loadInitialData(this.props.match.params.id)
-      } else if (!this.props.passage.content) {
-        history.push('/passages/new')
+    const { match, loadInitialData, passage, userId, clonePassage } = this.props
+    const { path } = match
+    const idFromParams = +match.params.id
+
+    if (path === '/passages/:id/edit') {
+      if (!passage.id || passage.id !== idFromParams) {
+        loadInitialData(idFromParams)
       }
-    } else if (this.props.match.path === '/newpassage') {
+      if (passage.id && passage.authorId !== userId) {
+        clonePassage(passage)
+      }
+    } else if (path === '/newpassage') {
       history.push('/passages/new')
     }
   }
@@ -34,12 +39,18 @@ class PassageForm extends Component {
 
     // if user goes to the 'new' form with a passage in the store
     if (nextProps.match.path === '/passages/new') {
-      if (nextProps.passage.id) {
+      if (nextProps.passage.id && nextProps.passage.authorId === nextProps.userId) {
         history.push(`/passages/${nextProps.passage.id}/edit`)
       }
     }
 
-    if (nextProps.passage && (nextProps.passage.title || nextProps.passage.content)) {
+    if (nextProps.match.path === '/passages/:id/edit') {
+      if (nextProps.passage.authorId !== nextProps.userId) {
+        this.props.clonePassage(nextProps.passage)
+      }
+    }
+
+    if (nextProps.passage && nextProps.passage.content) {
       this.setState({
         title: nextProps.passage.title,
         content: nextProps.passage.content
@@ -169,6 +180,14 @@ const mapDispatch = (dispatch) => {
     },
     clearPassage() {
       dispatch(gotPassage({}))
+      history.push('/passages/new')
+    },
+    clonePassage(passage) {
+      const clonedPassage = {
+        title: passage.title,
+        content: passage.content
+      }
+      dispatch(gotPassage(clonedPassage))
       history.push('/passages/new')
     }
   }
