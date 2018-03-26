@@ -1,15 +1,12 @@
 
 import React from 'react'
 import {
-  HorizontalGridLines,
-  VerticalGridLines,
   XAxis,
   FlexibleWidthXYPlot,
   YAxis,
   VerticalBarSeries
 } from 'react-vis'
 import { relative } from 'path'
-import TextWithLineBreaks from '../training/TextWithLineBreaks'
 
 
 //once we have data to pass to props,we should
@@ -49,10 +46,6 @@ class GraphLargeView extends React.Component {
     this.mouseLeaveChart = this.mouseLeaveChart.bind(this)
     this.xTicksFormat = this.xTicksFormat.bind(this)
     this.msToMinSec = this.msToMinSec.bind(this)
-    this.getY = this.getY.bind(this)
-  }
-  getY(dataPoint) {
-    console.log('getY', dataPoint)
   }
   xTicksFormat(val, i) {
     const { data } = this.props
@@ -60,7 +53,7 @@ class GraphLargeView extends React.Component {
       return `${data[i].decimationLevel}`
     }
   }
-  msToMinSec(val, i) {
+  msToMinSec(val) {
     let seconds = Math.floor(val / 1000)
     const minutes = Math.floor(seconds / 60)
     seconds = seconds % 60
@@ -97,13 +90,13 @@ class GraphLargeView extends React.Component {
       </FlexibleWidthXYPlot>
     )
   }
-  mouseLeaveChart(e) {
-    e.stopPropagation()
+  mouseLeaveChart(event) {
+    event.stopPropagation()
     this.setState({ time: null })
   }
 
-  showTime(e) {
-    const time = this.msToMinSec(e.y)
+  showTime(event) {
+    const time = this.msToMinSec(event.y)
     this.setState({ time })
     // console.log('showTime event', e)
   }
