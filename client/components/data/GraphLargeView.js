@@ -66,7 +66,7 @@ class GraphLargeView extends React.Component {
     console.log('chart(data) data', data)
     for (let i = 0; i < data.length; i++) {
       // makes x match graph position
-      data[i].x = i
+      data[i].x = i / eslint - disable - line id - length
       xTicksRange.push(i)
     }
 
@@ -101,11 +101,10 @@ class GraphLargeView extends React.Component {
     // console.log('showTime event', e)
   }
   render() {
-    //   <h3 style={{ color: '#a333c8', textAlign: 'center' }}> Previous Times</h3>
     const { data, xLabel, unsavedDataPoint } = this.props
     let chart
     if (unsavedDataPoint) {
-      unsavedDataPoint.x = data.length
+      unsavedDataPoint.x = data.length //eslint-disable-line id-length
       chart = this.chart([...data, unsavedDataPoint])
     } else {
       chart = this.chart(data)
