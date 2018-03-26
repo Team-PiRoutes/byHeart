@@ -4,6 +4,7 @@ import { Tab, Icon } from 'semantic-ui-react'
 import { fetchPassage } from '../store'
 import PassageTraining from './training/PassageTraining'
 import LineByLineTrainer from './training/LineByLineTrainer'
+import Instructions from './instructions'
 import './Training.css'
 import history from '../history'
 
@@ -28,23 +29,27 @@ export class Training extends Component {
     }
   }
 
-  render () {
+  render() {
+
     const panes = this.props.content && [
       /* when we add other views such as lines, just add the comonents between
       <Tab.Pain> <Component /></Tab.Pain> see tab 2 button example.
       */
       {
-        menuItem: 'Passage', render: () => ( // eslint-disable-line
+        menuItem: 'Train Full Passage', render: () => ( // eslint-disable-line
           <Tab.Pane key="1">
             <PassageTraining />
           </Tab.Pane>)
       },
-      { menuItem: 'Lines', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> } // eslint-disable-line
+      { menuItem: 'Train Line By Line', render: () => <Tab.Pane key="2"><LineByLineTrainer /></Tab.Pane> } // eslint-disable-line
     ]
     return (
       <div id="training-page">
+        <div>
+          <Instructions />
+        </div>
         <div className="corner-button">
-          <Icon name="close" onClick={() => {handleBackClick(this.props)}} />
+          <Icon name="close" onClick={() => { handleBackClick(this.props) }} />
         </div>
         <h3 className="documentTitle">{this.props.title ? this.props.title : 'Untitled Document'}
         </h3>
