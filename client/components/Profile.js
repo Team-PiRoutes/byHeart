@@ -44,31 +44,8 @@ export class Profile extends Component {
             </Card>
             {filteredPassages && filteredPassages.map(passage => {
               return (
-                <Card key={`passage-${passage.id}`} className="card" color="purple" centered>
+                <Card key={`passage-${passage.id}`} id="card" className="card" color="purple" raised centered>
                   <Card.Content>
-                    <div>
-                      <Button
-                        floated="right"
-                        animated="vertical"
-                        size="mini"
-                        className="cardButton"
-                        onClick={this.show}
-                      >
-                        <Button.Content hidden>Delete</Button.Content>
-                        <Button.Content visible>
-                          <Icon name="trash" size="large" />
-                        </Button.Content>
-                      </Button>
-                      <Confirm
-                        open={this.state.open}
-                        content="Are you sure you want to delete this passage?"
-                        cancelButton="Never mind"
-                        confirmButton="Let's do it"
-                        onCancel={this.handleCancel}
-                        onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
-                        size="small"
-                      />
-                    </div>
                     <Card.Header style={{ overflowWrap: 'break-word', padding: '0.5em' }}>
                       {passage.title}
                     </Card.Header>
@@ -76,7 +53,7 @@ export class Profile extends Component {
                       {passage.content.slice(0, 80).concat('(...)')}
                     </Card.Description>
                   </Card.Content>
-                  <Card.Content extra>
+                  <Card.Content id="extraContent" extra>
                     <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleTrainPassage(passage) }}>
                       <Button.Content hidden>Train</Button.Content>
                       <Button.Content visible>
@@ -89,6 +66,26 @@ export class Profile extends Component {
                         <Icon name="edit" size="large" />
                       </Button.Content>
                     </Button>
+                    <Button
+                      animated="vertical"
+                      size="mini"
+                      className="cardButton"
+                      onClick={this.show}
+                    >
+                      <Button.Content hidden>Delete</Button.Content>
+                      <Button.Content visible>
+                        <Icon name="trash" size="large" />
+                      </Button.Content>
+                    </Button>
+                    <Confirm
+                      open={this.state.open}
+                      content="Are you sure you want to delete this passage?"
+                      cancelButton="Never mind"
+                      confirmButton="Let's do it"
+                      onCancel={this.handleCancel}
+                      onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
+                      size="small"
+                    />
                     <Popup
                       trigger={
                         <Button as="div" size="mini" floated="right" labelPosition="right">

@@ -11,7 +11,7 @@ class Finished extends Component {
   }
 
   render() {
-    const { saveRehearsal, isRehearsalSaved, rehearsals } = this.props
+    const { saveRehearsal, isRehearsalSaved, rehearsals, userId, passage } = this.props
 
     let time = timer(this.props.time)
 
@@ -24,7 +24,7 @@ class Finished extends Component {
                 <Label basic pointing="right" size="big" color="purple">
                   <Icon name="time" /> {time}
                 </Label>
-                { !isRehearsalSaved ?
+                { (!isRehearsalSaved && userId && passage.id ) ?
                       (<Button onClick={saveRehearsal} animated="vertical" color="purple">
                         <Button.Content hidden>Save</Button.Content>
                         <Button.Content visible>
@@ -74,7 +74,7 @@ const mapState = state => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData(passageId, userId) {
-      if (userId) {
+      if (userId && passageId) {
         dispatch(fetchRehearsals(userId, passageId))
       }
     },
