@@ -53,7 +53,7 @@ class GraphLargeView extends React.Component {
       return `${data[i].decimationLevel}`
     }
   }
-  msToMinSec(val) {
+  msToMinSec(val) {//eslint-disable-line class-methods-use-this
     let seconds = Math.floor(val / 1000)
     const minutes = Math.floor(seconds / 60)
     seconds = seconds % 60

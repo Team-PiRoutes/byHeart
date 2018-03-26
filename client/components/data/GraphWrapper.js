@@ -25,7 +25,7 @@ class GraphWrapper extends React.Component {
     this.filterDecimate = this.filterDecimate.bind(this)
     this.filterByVersion = this.filterByVersion.bind(this)
   }
-  filterDecimate(level, data, yName) {
+  filterDecimate(level, data, yName) { //eslint-disable-line class-methods-use-this
     let filteredData = []
     data.forEach(dataPoint => {
 
@@ -36,7 +36,7 @@ class GraphWrapper extends React.Component {
     })
     return filteredData
   }
-  setXandY(data, yName) {
+  setXandY(data, yName) {//eslint-disable-line class-methods-use-this
     const copyOfData = data.map(dataPoint => {
       const newObj = Object.assign({ y: dataPoint[yName] }, dataPoint)
       return newObj
@@ -44,7 +44,7 @@ class GraphWrapper extends React.Component {
     return copyOfData
   }
 
-  filterByVersion(version, data) {
+  filterByVersion(version, data) {//eslint-disable-line class-methods-use-this
     console.log('version')
     let filteredData = data
       .filter(dataPoint => (dataPoint.passageUpdatedAt === version))
@@ -56,13 +56,13 @@ class GraphWrapper extends React.Component {
     const { data, unsavedDataPoint, decimationLevel, filterByLevel, filterByVersion, passage } = this.props
     const propertyToBeY = this.props.yName || 'y',
       xLabel = this.props.xLabel || 'Decimation Level'
-    // consoles.log('GraphWrapper = unsavedDataPoint ', unsavedDataPoint)
+
     let presentationData = unsavedDataPoint === undefined ? [...data] :
       [...data, unsavedDataPoint]
     if (filterByLevel) { presentationData = this.filterDecimate(decimationLevel, presentationData) }
     if (filterByVersion && passage.id) { presentationData = this.filterByVersion(passage.updatedAt, presentationData) }
     presentationData = this.setXandY(presentationData, propertyToBeY)
-    { console.log('presentationData', presentationData) }
+
     const enoughDataForGraph = presentationData.length > 1
     return (
       <div>
