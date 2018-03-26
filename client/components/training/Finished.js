@@ -11,7 +11,7 @@ class Finished extends Component {
   }
 
   render() {
-    const { saveRehearsal, isRehearsalSaved, rehearsals } = this.props
+    const { saveRehearsal, isRehearsalSaved, rehearsals, userId, passage } = this.props
 
     let time = timer(this.props.time)
 
@@ -24,7 +24,7 @@ class Finished extends Component {
                 <Label basic pointing="right" size="big" color="purple">
                   <Icon name="time" /> {time}
                 </Label>
-                { !isRehearsalSaved ?
+                { (!isRehearsalSaved && userId && passage.id ) ?
                       (<Button onClick={saveRehearsal} animated="vertical" color="purple">
                         <Button.Content hidden>Save</Button.Content>
                         <Button.Content visible>
@@ -46,40 +46,6 @@ class Finished extends Component {
             content="Click to read your lines again without changing the difficulty level."
             on="hover"
             position="bottom right"
-            inverted
-          />
-          <Popup
-            trigger={
-              <Button
-                icon
-                labelPosition="right"
-                onClick={this.props.startHarder}
-                floated="right"
-                style={{ marginLeft: '0.5em' }}>
-                <Icon name="plus" />
-                Make Harder
-              </Button>
-            }
-            content="Makes letters disappear from your lines. You can also control the level of difficulty with 'up' and 'down' keys."
-            on="hover"
-            position="bottom center"
-            inverted
-          />
-          <Popup
-            trigger={
-              <Button
-                icon
-                labelPosition="left"
-                onClick={this.props.startEasier}
-                floated="right"
-                style={{ marginLeft: '0.5em' }}>
-                <Icon name="minus" />
-                Make Easier
-              </Button>
-            }
-            content="Was it too difficult this time? Click to add back some letters to your lines."
-            on="hover"
-            position="bottom center"
             inverted
           />
         </Segment>
@@ -108,7 +74,7 @@ const mapState = state => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData(passageId, userId) {
-      if (userId) {
+      if (userId && passageId) {
         dispatch(fetchRehearsals(userId, passageId))
       }
     },

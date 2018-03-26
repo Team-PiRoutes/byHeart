@@ -13,7 +13,7 @@ import ProgressBar from './ProgressBar'
 const WAITING_TO_BEGIN = 'WAITING_TO_BEGIN'
 const TRAINING = 'TRAINING'
 const FINISHED = 'FINISHED'
-const PREVIOUS = 'ArrowUp'
+// const PREVIOUS = 'ArrowUp'
 const NEXT = 'ArrowDown'
 const HARDER = 'ArrowRight'
 const EASIER = 'ArrowLeft'
@@ -30,7 +30,8 @@ class LineByLineTrainer extends Component {
       timeStarted: null,
       timeFinished: null,
       lastKeyPressed: null,
-      isRehearsalSaved: false
+      isRehearsalSaved: false,
+      hideHardSpace: false
     }
     this.startTraining = this.startTraining.bind(this)
     this.nextCard = this.nextCard.bind(this)
@@ -38,11 +39,13 @@ class LineByLineTrainer extends Component {
     this.makeHarder = this.makeHarder.bind(this)
     this.startHarder = this.startHarder.bind(this)
     this.startEasier = this.startEasier.bind(this)
+    this.startOver = this.startOver.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleFinishedKey = this.handleFinishedKey.bind(this)
     this.handleTrainingKey = this.handleTrainingKey.bind(this)
     this.handleWaitingKey = this.handleWaitingKey.bind(this)
     this.saveRehearsal = this.saveRehearsal.bind(this)
+    this.handleToggleHardSpace = this.handleToggleHardSpace.bind(this)
   }
 
   handleKeyPress(event) {
@@ -59,15 +62,14 @@ class LineByLineTrainer extends Component {
   }
 
   handleWaitingKey(code) {
-    if (code === START) this.startTraining()
-    //else if (code === MOVE) this.startTraining()
+    if (code === START || code === MOVE) this.startTraining()
+    else if (code === HARDER) this.makeHarder()
+    else if (code === EASIER) this.makeEasier()
   }
 
   handleTrainingKey(code) {
     if (code === NEXT) this.nextCard()
-    else if (code === PREVIOUS) this.previousCard()
-    else if (code === HARDER) this.makeHarder()
-    else if (code === EASIER) this.makeEasier()
+    // else if (code === PREVIOUS) this.previousCard()
     else if (code === START) this.startTraining()
     else if (code === MOVE) this.nextCard()
   }
@@ -94,9 +96,29 @@ class LineByLineTrainer extends Component {
       isRehearsalSaved: !this.props.userId // prevent non-users from saving
     })
   }
+
+  startOver() {
+    this.setState({
+      currentLineIndex: 0,
+      status: WAITING_TO_BEGIN,
+      timeStarted: null,
+      timeFinished: null,
+      isRehearsalSaved: !this.props.userId // prevent non-users from saving
+    })
+  }
+
   handleInputChange = (event) => {
     this.setState({ decimationLevel: +event.target.value })
   }
+
+  handleToggleHardSpace = () => {
+    console.log('handleHardSpace')
+    this.setState({
+      ...this.state,
+      hideHardSpace: !this.state.hideHardSpace
+    })
+  }
+
   nextCard() {
     if (this.state.status === TRAINING) {
       const currentLineIndex = this.state.currentLineIndex + 1
@@ -173,28 +195,35 @@ class LineByLineTrainer extends Component {
       passageUpdatedAt: this.props.passage.updatedAt
     }
 
-    if (rehearsal.userId && !this.state.isRehearsalSaved) {
+    if (rehearsal.userId && rehearsal.passageId && !this.state.isRehearsalSaved) {
       this.setState({ isRehearsalSaved: true })
       this.props.createRehearsal(rehearsal)
     }
   }
 
   render() {
-    const { decimationLevel, currentLineIndex, status, isRehearsalSaved } = this.state
+    const { decimationLevel, currentLineIndex, status, isRehearsalSaved, hideHardSpace } = this.state
     const { passage } = this.props
 
     const lines = breakIntoLines(passage.content)
-    const lineAbove = (currentLineIndex > 0) ? decimateString(lines[currentLineIndex - 1], decimationLevel) : ''
+    const lineAbove = (currentLineIndex > 0) ? decimateString(lines[currentLineIndex - 1], decimationLevel, hideHardSpace) : ''
     // const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
     const currentLine = lines[currentLineIndex]
-    const lineBelow = (currentLineIndex < lines.length - 1) ? decimateString(lines[currentLineIndex + 1], decimationLevel) : ''
+    const lineBelow = (currentLineIndex < lines.length - 1) ? decimateString(lines[currentLineIndex + 1], decimationLevel, hideHardSpace) : ''
 
 
     switch (status) {
       case WAITING_TO_BEGIN:
         return (
           <div>
-            <StartButton click={this.startTraining} handleInputChange={this.handleInputChange} decimationLevel={this.state.decimationLevel} input={(input) => { this.slideBar = input }} />
+            <StartButton
+              click={this.startTraining}
+              handleInputChange={this.handleInputChange}
+              decimationLevel={this.state.decimationLevel}
+              input={(input) => { this.slideBar = input }}
+              hideHardSpace={hideHardSpace}
+              handleToggleHardSpace={this.handleToggleHardSpace}
+            />
           </div>
         )
       case TRAINING:
@@ -202,12 +231,13 @@ class LineByLineTrainer extends Component {
           <div>
             <ProgressBar lines={lines} currentLineIndex={currentLineIndex} />
             <Card
-              startOver={this.startTraining}
+              startOver={this.startOver}
               lineAbove={lineAbove}
               currentLine={currentLine}
               lineBelow={lineBelow}
               decimationLevel={decimationLevel}
               next={this.nextCard}
+              hideHardSpace={hideHardSpace}
             />
           </div>
         )
@@ -216,7 +246,7 @@ class LineByLineTrainer extends Component {
           <Finished
             startHarder={this.startHarder}
             startEasier={this.startEasier}
-            startOver={this.startTraining}
+            startOver={this.startOver}
             time={this.state.timeFinished - this.state.timeStarted}
             saveRehearsal={this.saveRehearsal}
             isRehearsalSaved={isRehearsalSaved}

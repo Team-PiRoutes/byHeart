@@ -55,3 +55,6 @@ h1 {
 #card {
   min-height: 167.41px;
 }
+.checkbox-spaces {
+  margin-left: 1rem;
+}
