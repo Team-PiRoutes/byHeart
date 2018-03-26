@@ -20,12 +20,12 @@ class TipText extends React.Component {
 
     const hintObj = individualWordHint(this.props.hintArray, this.state.hintLevel)
     this.setState({
-      hover: true,
       hintLevel: hintObj.hintLevel
     })
   }
 
   handleMouseEnter() {
+    //potentially change
     this.setState({
       hover: true
     })

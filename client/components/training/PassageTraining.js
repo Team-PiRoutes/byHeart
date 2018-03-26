@@ -43,8 +43,8 @@ class PassageTraining extends Component {
   }
 
   handleKeyPress(event) {
-    console.log('event: ', event.code)
-    console.log('this.makeHarder: ', this.makeHarder)
+    // console.log('event: ', event.code)
+    // console.log('this.makeHarder: ', this.makeHarder)
     if (event.code === HARDER) this.makeHarder()
     else if (event.code === EASIER) this.makeEasier()
   }

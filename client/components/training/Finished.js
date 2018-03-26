@@ -3,18 +3,37 @@ import { connect } from 'react-redux'
 import { fetchRehearsals } from '../../store'
 import { Button, Icon, Label, Segment, Popup } from 'semantic-ui-react'
 import timer from '../../utils/timer'
+import GraphWrapper from '../data/GraphWrapper'
 import DifficultyLabel from './DifficultyLabel'
 
 class Finished extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      filterGraphBySameLevel: false,
+      filterGraphBySameVersion: false
+    }
+    this.filterGraphBySameLevel = this.filterGraphBySameLevel.bind(this)
+    this.filterGraphBySameVersion = this.filterGraphBySameVersion.bind(this)
+  }
+  filterGraphBySameLevel() {
+    this.setState({ filterGraphBySameLevel: !this.state.filterGraphBySameLevel })
+  }
+  filterGraphBySameVersion() {
+    this.setState({ filterGraphBySameVersion: !this.state.filterGraphBySameVersion })
+  }
+
   componentDidMount() {
     const { userId, passage, loadInitialData } = this.props
     loadInitialData(passage.id, userId)
   }
 
   render() {
-    const { saveRehearsal, isRehearsalSaved, rehearsals, userId, passage, decimationLevel } = this.props
+    const { saveRehearsal, isRehearsalSaved, rehearsals, currentRehearsal, userId, passage, decimationLevel } = this.props
 
     let time = timer(this.props.time)
+    //react-vis will not display single data point charts.rehearsals &&
+    const canShowChart = rehearsals && this.props.passage.id !== undefined
 
     return (
       <div>
@@ -50,16 +69,33 @@ class Finished extends Component {
             inverted
           />
         </Segment>
+        {canShowChart &&
+          <Button
+            onClick={this.filterGraphBySameLevel}
+            active={this.state.filterGraphBySameLevel}
+            color={this.state.filterGraphBySameLevel ? 'purple' : null}
+          >
+            Show Same Level Only
+        </Button>}
+        {canShowChart &&
+          <Button
+            onClick={this.filterGraphBySameVersion}
+            active={this.state.filterGraphBySameVersion}
+            color={this.state.filterGraphBySameVersion ? 'purple' : null}
+          >
+            Show Same Passage Version Only
+        </Button>}
+        {
+          canShowChart && <GraphWrapper
+            data={rehearsals}
+            filterByLevel={this.state.filterGraphBySameLevel}
+            filterByVersion={this.state.filterGraphBySameVersion}
+            yName={'elapsedTime'}
+            unsavedDataPoint={currentRehearsal}
+            decimationLevel={decimationLevel} />
+        }
         <DifficultyLabel decimateLevel={decimationLevel} />
-        <ul>
-          {rehearsals && rehearsals.map(rehearsal => {
-            return (
-              <li key={rehearsal.id}>
-                {rehearsal.elapsedTime} ms
-              </li>
-            )
-          })}
-        </ul>
+
       </div>
     )
   }
