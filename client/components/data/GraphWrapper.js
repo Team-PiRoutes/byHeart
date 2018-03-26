@@ -19,42 +19,50 @@ import { connect } from 'react-redux'
 // ]
 
 
-export default class GraphWrapper extends React.Component {
+class GraphWrapper extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      decimationLevelFilter: null
-    }
     this.filterDecimate = this.filterDecimate.bind(this)
+    this.filterByVersion = this.filterByVersion.bind(this)
   }
-  filterDecimate(level, data) {
-    console.log('filterDecimate', data)
-    const yName = this.props.yName || 'y'
-    let filteredData = data.map(dataPoint => {
-      if (dataPoint.decimationLevel !== null &&
-        dataPoint.decimationLevel !== level) {
-        dataPoint.y = dataPoint[yName]
-        return dataPoint
-      } else {
-        dataPoint.y = dataPoint[yName]
-        return dataPoint
+  filterDecimate(level, data, yName) {
+    let filteredData = []
+    data.forEach(dataPoint => {
+
+      if (dataPoint.decimationLevel === level) {
+
+        filteredData.push(dataPoint)
       }
     })
+    return filteredData
+  }
+  setXandY(data, yName) {
+    const copyOfData = data.map(dataPoint => {
+      const newObj = Object.assign({ y: dataPoint[yName] }, dataPoint)
+      return newObj
+    })
+    return copyOfData
+  }
+
+  filterByVersion(version, data) {
+    console.log('version')
+    let filteredData = data
+      .filter(dataPoint => (dataPoint.passageUpdatedAt === version))
     return filteredData
   }
 
   render() {
 
-    let { decimationLevelFilter } = this.state
-    const { data, unsavedDataPoint } = this.props
-    const xLabel = this.props.xLabel !== undefined ?
-      this.props.xLabel : 'Decimation Level'
+    const { data, unsavedDataPoint, decimationLevel, filterByLevel, filterByVersion, passage } = this.props
+    const propertyToBeY = this.props.yName || 'y',
+      xLabel = this.props.xLabel || 'Decimation Level'
     // consoles.log('GraphWrapper = unsavedDataPoint ', unsavedDataPoint)
     let presentationData = unsavedDataPoint === undefined ? [...data] :
       [...data, unsavedDataPoint]
-
-    presentationData = this.filterDecimate(decimationLevelFilter, presentationData)
-
+    if (filterByLevel) { presentationData = this.filterDecimate(decimationLevel, presentationData) }
+    if (filterByVersion && passage.id) { presentationData = this.filterByVersion(passage.updatedAt, presentationData) }
+    presentationData = this.setXandY(presentationData, propertyToBeY)
+    { console.log('presentationData', presentationData) }
     const enoughDataForGraph = presentationData.length > 1
     return (
       <div>
@@ -69,11 +77,12 @@ export default class GraphWrapper extends React.Component {
 /**
  * CONTAINER
  */
-// const mapState = state => {
-//   return {
-//     rehearsals: state.rehearsals,
-//     isLoggedIn: !!state.user.id
-//   }
-// }
+const mapState = state => {
+  return {
+    passage: state.passage,
+    rehearsals: state.rehearsals,
+    isLoggedIn: !!state.user.id
+  }
+}
 
-// export default connect(mapState)(GraphWrapper)
+export default connect(mapState)(GraphWrapper)
