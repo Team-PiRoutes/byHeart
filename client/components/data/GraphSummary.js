@@ -30,15 +30,6 @@ function msToMinSec(val) {
 }
 
 
-function Chart(data) {
-  return (<XYPlot width={200} height={300} color="#a333c8">
-    <XAxis />
-    <YAxis tickFormat={msToMinSec} />
-    <HorizontalGridLines />
-    <VerticalGridLines />
-    <VerticalBarSeries data={data} onNearestX={showTime} />
-  </XYPlot>)
-}
 class GraphSummary extends React.Component {
   constructor(props) {
     super(props)
@@ -47,7 +38,8 @@ class GraphSummary extends React.Component {
       // position: 'relative',
       textAlign: 'center',
       color: '#a333c8',
-      margin: '0px'
+      margin: '0px',
+      size: '1.3em'
     }
     this.containerStyle = {
       margin: '20px',
@@ -63,7 +55,7 @@ class GraphSummary extends React.Component {
     this.mouseLeaveChart = this.mouseLeaveChart.bind(this)
   }
   chart(data) {
-    return (<XYPlot width={200} height={300} color="#a333c8">
+    return (<XYPlot width={200} height={170} color="#a333c8">
       <XAxis />
       <YAxis tickFormat={msToMinSec} left={10} />
       <HorizontalGridLines />
@@ -82,16 +74,23 @@ class GraphSummary extends React.Component {
     console.log('showTime event', e)
   }
   render() {
-    // const time = this.state.time === null ? (<i aria-hidden="true" class="clock large icon"></i>) ?
-    //   (<h4 style={this.timeDisplayStyle}>{time} </h4>)
-    const time = 'sdf'
+    //   <h3 style={{ color: '#a333c8', textAlign: 'center' }}> Previous Times</h3>
     const chart = this.chart(data)
     return (
       <div style={this.containerStyle} onMouseLeave={this.mouseLeaveChart}>
-        <h3 style={{ color: '#a333c8', textAlign: 'center' }}> Previous Times</h3>
-        <div style={this.chartStyle}>{chart}</div>
-        <h4 style={this.timeDisplayStyle}>{time} </h4>
+        <h3>GraphSummary</h3>
+        {
+          <div style={this.timeDisplayStyle}> {
+            this.state.time === null ?
+              (<i aria-hidden="true" className="clock large icon" />) :
+              (<div style={this.timeDisplayStyle}>{this.state.time} </div>)}
+          </div>
+        }
+        <div style={this.chartStyle}>
+          {chart}
+        </div>
       </div>
+
     )
   }
 }

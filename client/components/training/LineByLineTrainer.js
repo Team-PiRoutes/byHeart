@@ -4,7 +4,6 @@ import './LineByLineTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { breakIntoLines } from '../../utils/text-to-lines'
 import { createRehearsal } from '../../store/'
-
 import Card from './Card'
 import StartButton from './StartButton'
 import Finished from './Finished'
@@ -210,7 +209,18 @@ class LineByLineTrainer extends Component {
     // const currentLine = decimateString(lines[currentLineIndex], decimationLevel)
     const currentLine = lines[currentLineIndex]
     const lineBelow = (currentLineIndex < lines.length - 1) ? decimateString(lines[currentLineIndex + 1], decimationLevel, hideHardSpace) : ''
-
+    let unsavedRehearsal
+    if (!isRehearsalSaved) {
+      unsavedRehearsal = {
+        userId: this.props.userId,
+        passageId: this.props.passage.id,
+        startTime: this.state.timeStarted,
+        endTime: this.state.timeFinished,
+        decimationLevel: this.state.decimationLevel,
+        passageUpdatedAt: this.props.passage.updatedAt,
+        elapsedTime: (this.state.timeFinished - this.state.timeStarted)
+      }
+    }
 
     switch (status) {
       case WAITING_TO_BEGIN:
@@ -242,6 +252,7 @@ class LineByLineTrainer extends Component {
           </div>
         )
       case FINISHED:
+
         return (
           <Finished
             startHarder={this.startHarder}
@@ -250,6 +261,8 @@ class LineByLineTrainer extends Component {
             time={this.state.timeFinished - this.state.timeStarted}
             saveRehearsal={this.saveRehearsal}
             isRehearsalSaved={isRehearsalSaved}
+            decimationLevel={decimationLevel}
+            currentRehearsal={unsavedRehearsal}
           />
         )
       default:

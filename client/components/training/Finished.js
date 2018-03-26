@@ -3,17 +3,26 @@ import { connect } from 'react-redux'
 import { fetchRehearsals } from '../../store'
 import { Button, Icon, Label, Segment, Popup } from 'semantic-ui-react'
 import timer from '../../utils/timer'
-
+import GraphWrapper from '../data/GraphWrapper'
 class Finished extends Component {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     filterSameLevel: false,
+  //     filterSameVersion: false
+
+
+  //   }
   componentDidMount() {
     const { userId, passage, loadInitialData } = this.props
     loadInitialData(passage.id, userId)
   }
 
   render() {
-    const { saveRehearsal, isRehearsalSaved, rehearsals } = this.props
-
+    const { saveRehearsal, isRehearsalSaved, rehearsals, currentRehearsal } = this.props
     let time = timer(this.props.time)
+    //react-vis will not display single data point charts.rehearsals &&
+    const canShowChart = rehearsals && this.props.passage.id !== undefined
 
     return (
       <div>
@@ -24,14 +33,14 @@ class Finished extends Component {
                 <Label basic pointing="right" size="big" color="purple">
                   <Icon name="time" /> {time}
                 </Label>
-                { !isRehearsalSaved ?
-                      (<Button onClick={saveRehearsal} animated="vertical" color="purple">
-                        <Button.Content hidden>Save</Button.Content>
-                        <Button.Content visible>
-                          <Icon name="save" />
-                        </Button.Content>
-                      </Button>)
-                    : null
+                {!isRehearsalSaved ?
+                  (<Button onClick={saveRehearsal} animated="vertical" color="purple">
+                    <Button.Content hidden>Save</Button.Content>
+                    <Button.Content visible>
+                      <Icon name="save" />
+                    </Button.Content>
+                  </Button>)
+                  : null
                 }
               </Button>
             }
@@ -83,15 +92,13 @@ class Finished extends Component {
             inverted
           />
         </Segment>
-        <ul>
-          {rehearsals && rehearsals.map(rehearsal => {
-            return (
-              <li key={rehearsal.id}>
-                {rehearsal.elapsedTime} ms
-              </li>
-            )
-          })}
-        </ul>
+        {
+          canShowChart && <GraphWrapper
+            data={rehearsals}
+            filter={}
+            yName={'elapsedTime'}
+            unsavedDataPoint={currentRehearsal} />
+        }
       </div>
     )
   }
