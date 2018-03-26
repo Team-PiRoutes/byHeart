@@ -195,7 +195,7 @@ class LineByLineTrainer extends Component {
       passageUpdatedAt: this.props.passage.updatedAt
     }
 
-    if (rehearsal.userId && !this.state.isRehearsalSaved) {
+    if (rehearsal.userId && rehearsal.passageId && !this.state.isRehearsalSaved) {
       this.setState({ isRehearsalSaved: true })
       this.props.createRehearsal(rehearsal)
     }
