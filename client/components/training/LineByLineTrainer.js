@@ -4,6 +4,7 @@ import './LineByLineTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { breakIntoLines } from '../../utils/text-to-lines'
 import { createRehearsal } from '../../store/'
+import DifficultyLabel from './DifficultyLabel'
 
 import Card from './Card'
 import StartButton from './StartButton'
@@ -224,6 +225,7 @@ class LineByLineTrainer extends Component {
               hideHardSpace={hideHardSpace}
               handleToggleHardSpace={this.handleToggleHardSpace}
             />
+            <DifficultyLabel decimateLevel={this.state.decimationLevel} />
           </div>
         )
       case TRAINING:
@@ -239,6 +241,7 @@ class LineByLineTrainer extends Component {
               next={this.nextCard}
               hideHardSpace={hideHardSpace}
             />
+            <DifficultyLabel decimateLevel={this.state.decimationLevel} />
           </div>
         )
       case FINISHED:
@@ -250,6 +253,7 @@ class LineByLineTrainer extends Component {
             time={this.state.timeFinished - this.state.timeStarted}
             saveRehearsal={this.saveRehearsal}
             isRehearsalSaved={isRehearsalSaved}
+            decimationLevel={decimationLevel}
           />
         )
       default:
