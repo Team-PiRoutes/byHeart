@@ -25,7 +25,7 @@ class GraphWrapper extends React.Component {
     this.filterDecimate = this.filterDecimate.bind(this)
     this.filterByVersion = this.filterByVersion.bind(this)
   }
-  filterDecimate(level, data, yName) { //eslint-disable-line class-methods-use-this
+  filterDecimate(level, data) { //eslint-disable-line class-methods-use-this
     let filteredData = []
     data.forEach(dataPoint => {
 
@@ -38,7 +38,7 @@ class GraphWrapper extends React.Component {
   }
   setXandY(data, yName) {//eslint-disable-line class-methods-use-this
     const copyOfData = data.map(dataPoint => {
-      const newObj = Object.assign({ y: dataPoint[yName] }, dataPoint)
+      const newObj = Object.assign({ y: dataPoint[yName] }, dataPoint) //eslint-disable-line id-length
       return newObj
     })
     return copyOfData
