@@ -68,5 +68,14 @@ h1 {
   margin-right: auto;
   left: 0;
   right: 0;
-  height: 250px
+  height: 270px;
+  padding-bottom: 20px;
+}
+
+#landing-cards:hover .card-landing{
+  background-color: #f9f2fc;
+}
+
+.description {
+  padding-bottom: 0.5em;
 }

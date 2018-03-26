@@ -17,7 +17,7 @@ const card3 = [
   'Edit, save or delete your passages',
 ]
 const card4 = [
-  'Never forget your lines again! ',
+  'Get hints when you are stuck',
 ]
 
 class LandingPage extends Component {
@@ -67,26 +67,26 @@ class LandingPage extends Component {
           }
         </Button.Group>
         <Card.Group id="landing-cards" itemsPerRow={4}>
-          <Card raised color="purple">
+          <Card className="card-landing" color="purple">
             <Card.Content>
               <Card.Header>LEARN</Card.Header>
               <Card.Description>{card1}</Card.Description>
             </Card.Content>
           </Card>
-          <Card color="purple">
+          <Card className="card-landing" color="purple">
             <Card.Content>
               <Card.Header>IT</Card.Header>
-              <Image src="" />
               <Card.Description>{card2}</Card.Description>
+              <Image src="decimation.gif" />
             </Card.Content>
           </Card>
-          <Card color="purple">
+          <Card className="card-landing" color="purple">
             <Card.Content>
               <Card.Header>BY</Card.Header>
               <Card.Description>{card3}</Card.Description>
             </Card.Content>
           </Card>
-          <Card color="purple">
+          <Card className="card-landing" color="purple">
             <Card.Content>
               <Card.Header>HEART</Card.Header>
               <Card.Description>{card4}</Card.Description>
