@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages, removePassage } from '../store/'
-import { Card, Button, Icon, Label, Popup, Confirm, Reveal, Container, Image } from 'semantic-ui-react'
+import { Card, Button, Icon, Label, Popup, Confirm } from 'semantic-ui-react'
 import history from '../history'
 
 export class Profile extends Component {
@@ -46,29 +46,6 @@ export class Profile extends Component {
               return (
                 <Card key={`passage-${passage.id}`} id="card" className="card" color="purple" raised centered>
                   <Card.Content>
-                    <div>
-                      <Button
-                        floated="right"
-                        animated="vertical"
-                        size="mini"
-                        className="cardButton"
-                        onClick={this.show}
-                      >
-                        <Button.Content hidden>Delete</Button.Content>
-                        <Button.Content visible>
-                          <Icon name="trash" size="large" />
-                        </Button.Content>
-                      </Button>
-                      <Confirm
-                        open={this.state.open}
-                        content="Are you sure you want to delete this passage?"
-                        cancelButton="Never mind"
-                        confirmButton="Let's do it"
-                        onCancel={this.handleCancel}
-                        onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
-                        size="small"
-                      />
-                    </div>
                     <Card.Header style={{ overflowWrap: 'break-word', padding: '0.5em' }}>
                       {passage.title}
                     </Card.Header>
@@ -77,32 +54,52 @@ export class Profile extends Component {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content id="extraContent" extra>
-                        <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleTrainPassage(passage) }}>
-                          <Button.Content hidden>Train</Button.Content>
-                          <Button.Content visible>
-                            <Icon name="file text outline" size="large" />
-                          </Button.Content>
+                    <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleTrainPassage(passage) }}>
+                      <Button.Content hidden>Train</Button.Content>
+                      <Button.Content visible>
+                        <Icon name="file text outline" size="large" />
+                      </Button.Content>
+                    </Button>
+                    <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleEditPassage(passage) }}>
+                      <Button.Content hidden>Edit</Button.Content>
+                      <Button.Content visible>
+                        <Icon name="edit" size="large" />
+                      </Button.Content>
+                    </Button>
+                    <Button
+                      animated="vertical"
+                      size="mini"
+                      className="cardButton"
+                      onClick={this.show}
+                    >
+                      <Button.Content hidden>Delete</Button.Content>
+                      <Button.Content visible>
+                        <Icon name="trash" size="large" />
+                      </Button.Content>
+                    </Button>
+                    <Confirm
+                      open={this.state.open}
+                      content="Are you sure you want to delete this passage?"
+                      cancelButton="Never mind"
+                      confirmButton="Let's do it"
+                      onCancel={this.handleCancel}
+                      onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
+                      size="small"
+                    />
+                    <Popup
+                      trigger={
+                        <Button as="div" size="mini" floated="right" labelPosition="right">
+                          <Button color="purple">
+                            <Icon name="clock" size="large" />
+                          </Button>
+                          <Label as="a" basic color="purple" pointing="left">00:00:08:4</Label>
                         </Button>
-                        <Button animated="vertical" size="mini" className="cardButton" onClick={() => { handleEditPassage(passage) }}>
-                          <Button.Content hidden>Edit</Button.Content>
-                          <Button.Content visible>
-                            <Icon name="edit" size="large" />
-                          </Button.Content>
-                        </Button>
-                        <Popup
-                          trigger={
-                            <Button as="div" size="mini" floated="right" labelPosition="right">
-                              <Button color="purple">
-                                <Icon name="clock" size="large" />
-                              </Button>
-                              <Label as="a" basic color="purple" pointing="left">00:00:08:4</Label>
-                            </Button>
-                          }
-                          content="Last time you read this passage in this amount of time"
-                          position="bottom center"
-                          on="hover"
-                          inverted
-                        />
+                      }
+                      content="Last time you read this passage in this amount of time"
+                      position="bottom center"
+                      on="hover"
+                      inverted
+                    />
                   </Card.Content>
                 </Card>
               )

@@ -45,9 +45,13 @@ h1 {
 }
 
 #card:hover #extraContent {
-  display: block
+  display: block;
 }
 
 #extraContent {
-  display: none
+  display: none;
+}
+
+#card {
+  min-height: 167.41px;
 }
