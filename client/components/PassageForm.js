@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, TextArea, Button, Label, Segment } from 'semantic-ui-react'
+import { Form, Input, TextArea, Button, Label, Segment, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchPassage, updatePassage, gotPassage, postPassage } from '../store'
 import history from '../history'
@@ -87,6 +87,8 @@ class PassageForm extends Component {
     // console.log('passage: ', passage)
     const { title, content } = this.state
     const label = this.getLabel()
+    const isSaveable = userId && !passage.id
+    const isUpdatable = passage.id && userId && passage.authorId === userId
 
     return (
 
@@ -111,23 +113,26 @@ class PassageForm extends Component {
             label="Passage"
             placeholder="Passage"
           />
-          <div style={{ width: '100%', padding: '1em' }}>
-            <Button type="submit" content="Start" floated="right" style={{ marginLeft: '0.5em' }} />
-            {(title !== '' || content !== '') ?
+          <div id="flex-buttons-form" >
+            {isSaveable
+              ? <Button onClick={(event) => { handleSave(userId, passage, event) }} content="Save" style={{ marginLeft: '0.5em' }} />
+              : null
+            }
+            {isUpdatable
+              ? <Segment id="public-private-toggle" >
+                <Checkbox toggle label="Make public?" style={{color: 'purple'}} />
+              </Segment> : null
+            }
+            {isUpdatable
+              ? <Button onClick={(event) => { handleUpdate(passage, event) }} content="Update" style={{ marginLeft: '0.5em' }} />
+              : null
+            }
             <Button
               onClick={(event) => { this.handleClearButton(event) }}
               content="Clear"
-              floated="right"
               style={{ marginLeft: '0.5em' }}
-            /> : null }
-            {(userId && !passage.id)
-              ? <Button onClick={(event) => { handleSave(userId, passage, event) }} content="Save" floated="right" style={{ marginLeft: '0.5em' }} />
-              : null
-            }
-            {(passage.id && userId && passage.authorId === userId)
-              ? <Button onClick={(event) => { handleUpdate(passage, event) }} content="Update" floated="right" style={{ marginLeft: '0.5em' }} />
-              : null
-            }
+            />
+            <Button type="submit" content="Start" style={{ marginLeft: '0.5em' }} />
           </div>
         </Form>
       </Segment>
