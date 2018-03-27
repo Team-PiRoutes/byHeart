@@ -16,7 +16,7 @@ export class Stats extends Component {
     }
     this.filterGraphByLevel = this.filterGraphByLevel.bind(this)
     this.filterGraphByVersion = this.filterGraphByVersion.bind(this)
-    this.handleKeyPress = this.handleKeyPress.bind(this)
+
   }
   componentDidMount() {
     const { match, loadInitialData } = this.props
