@@ -96,3 +96,43 @@ h1 {
     top: -50px;
   }
 }
+
+#public-private-toggle input:checked~.box:before,  #public-private-toggle input:checked~label:before {
+  background-color: purple!important;
+  color: rgba(0,0,0,.6);
+}
+
+#public-private-toggle {
+  margin: 0 .25rem 0 .25rem;
+  padding: 0;
+  float: right;
+  height: 35px;
+  background-color: #e0e1e2;
+  line-height: 1rem;
+  border: none;
+}
+
+#public-private-toggle label {
+  color: rgba(0,0,0,.6);
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+#public-private-toggle>.ui.toggle.checkbox {
+  margin-top: 8px;
+}
+
+#flex-buttons-form {
+  justify-content: flex-end;
+  display: flex;
+  margin: 1rem 0;
+}
+
+#formTitle {
+  font-size: 2rem;
+}
+
+#formContent {
+  font-size: 1.5rem;
+}
