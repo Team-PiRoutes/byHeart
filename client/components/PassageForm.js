@@ -83,7 +83,7 @@ class PassageForm extends Component {
 
   render() {
 
-    const { handleStart, handleSave, userId, handleUpdate, passage } = this.props
+    const { handleStart, handleSave, userId, handleUpdate, passage, togglePublic } = this.props
     // console.log('passage: ', passage)
     const { title, content } = this.state
     const label = this.getLabel()
@@ -115,16 +115,30 @@ class PassageForm extends Component {
           />
           <div id="flex-buttons-form" >
             {isSaveable
-              ? <Button onClick={(event) => { handleSave(userId, passage, event) }} content="Save" style={{ marginLeft: '0.5em' }} />
+              ? <Button
+                  onClick={(event) => { handleSave(userId, passage, event) }}
+                  content="Save"
+                  style={{ marginLeft: '0.5em' }}
+                />
               : null
             }
             {isUpdatable
               ? <Segment id="public-private-toggle" >
-                <Checkbox toggle label="Make public?" style={{color: 'purple'}} />
+                <Checkbox
+                  toggle
+                  label="Make public?"
+                  style={{color: 'purple'}}
+                  checked={passage.isPublic}
+                  onClick={() => {togglePublic(passage)}}
+                />
               </Segment> : null
             }
             {isUpdatable
-              ? <Button onClick={(event) => { handleUpdate(passage, event) }} content="Update" style={{ marginLeft: '0.5em' }} />
+              ? <Button
+                  onClick={(event) => { handleUpdate(passage, event) }}
+                  content="Update"
+                  style={{ marginLeft: '0.5em' }}
+                />
               : null
             }
             <Button
@@ -194,6 +208,10 @@ const mapDispatch = (dispatch) => {
       }
       dispatch(gotPassage(clonedPassage))
       history.push('/passages/new')
+    },
+    togglePublic(passage) {
+      passage.isPublic = !passage.isPublic
+      dispatch(updatePassage(passage))
     }
   }
 }
