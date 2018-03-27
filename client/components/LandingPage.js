@@ -71,6 +71,7 @@ class LandingPage extends Component {
             <Card.Content>
               <Card.Header>LEARN</Card.Header>
               <Card.Description>{card1}</Card.Description>
+              <Image src="views.gif" />
             </Card.Content>
           </Card>
           <Card className="card-landing" color="purple">
@@ -90,6 +91,7 @@ class LandingPage extends Component {
             <Card.Content>
               <Card.Header>HEART</Card.Header>
               <Card.Description>{card4}</Card.Description>
+              <Image src="hints.gif" />
             </Card.Content>
           </Card>
         </Card.Group>
