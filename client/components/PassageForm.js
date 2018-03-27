@@ -18,7 +18,7 @@ class PassageForm extends Component {
   }
 
   componentWillMount() {
-    const { match, loadInitialData, passage, userId, clonePassage } = this.props
+    const { match, loadInitialData, passage } = this.props
     const { path } = match
     const idFromParams = +match.params.id
 

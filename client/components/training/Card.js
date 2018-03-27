@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
 import SpannedText from './SpannedText'
-import './Card.css'
 
 const Card = (props) => {
 

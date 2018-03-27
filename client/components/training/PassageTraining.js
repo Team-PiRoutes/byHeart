@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Sticky, Checkbox } from 'semantic-ui-react'
-import './PassageTrainer.css'
 import TextWithLineBreaks from './TextWithLineBreaks'
 import DifficultyLabel from './DifficultyLabel'
 

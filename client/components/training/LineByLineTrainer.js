@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import './LineByLineTrainer.css'
 import { decimateString } from '../../utils/decimate'
 import { breakIntoLines } from '../../utils/text-to-lines'
 import { createRehearsal } from '../../store/'
