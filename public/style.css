@@ -35,7 +35,7 @@ div.passage-cards {
   padding:  0 0 0;
 }
 
-h1 {
+h1, h2 {
   position: relative;
   text-align: center;
   padding: 1vw;
@@ -62,18 +62,27 @@ h1 {
 }
 
 #landing-cards{
-  position: absolute;
-  bottom: 0;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  height: 270px;
-  padding-bottom: 20px;
+  display: flex;
+  margin-top: 5rem;
+  padding: 3rem;
+  justify-content: space-between;
 }
 
 #landing-cards:hover .card-landing{
   background-color: #f9f2fc;
+}
+
+.card-landing.ui.card:first-child {
+  margin-top: 1rem;
+}
+
+.card-landing {
+  box-shadow: 1px 1px 4px #B413EC;
+  text-align: center;
+  min-height: 18vw;
+  width: 20vw;
+  padding: 1.5rem;
+  border-radius: 3px;
 }
 
 .description {
@@ -144,10 +153,12 @@ h1 {
 }
 
 #heartHeader {
-  font-size: 4em;
+  font-size: 4rem;
   font-weight: normal;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 4rem;
+  min-height: 6rem;
 }
 
 .navButton {
@@ -264,4 +275,46 @@ div.button-wrapper {
   margin-left: auto;
   height: 100%;
   max-width: 900px;
+}
+
+/* Front Page */
+
+#landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#home-buttons {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.landing-card-img {
+  width: 15vw;
+  box-shadow: 1px 1px 4px gray;
+}
+
+@media only screen and (max-width: 1200px) {
+  .card-landing {
+    min-height: 21vw;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #landing-cards{
+    flex-wrap: wrap;
+  }
+    
+  .card-landing {
+    border: #B413EC 1px solid;
+    text-align: center;
+    min-height: 30vw;
+    width: 40vw;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .landing-card-img {
+    width: 34vw;
+  }  
 }

@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { gotPassage } from '../store/passage'
 import history from '../history'
-import { Button, Container, Header, Card, Image } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
 
 
 const card1 = [
-  'Read full text at once or line-by-line',
+  'Read full text at once or line by line',
 ]
 const card2 = [
   'Letters disappear from your text depending on chosen difficulty level',
 ]
 const card3 = [
-  'Edit, save or delete your passages',
+  'Edit, delete or save passages on your profile.',
 ]
 const card4 = [
-  'Get hints when you are stuck',
+  'Hover your mouse over a word to get hints when you are stuck',
 ]
 
 class LandingPage extends Component {
@@ -45,56 +45,55 @@ class LandingPage extends Component {
     const tagLineTwo = decimateString(str, this.state.indexTag)
 
     return (
-      <Container text id="landing" textAlign="center" style={{ height: 100 }} vertical="true">
-        <Header
-          id="tagLine"
-          as="h2"
-          content={tagLineTwo}
-        />
-        <Header
-          id="heartHeader"
-          as="h1"
-          content={heartHeading[this.state.indexHeart]}
-        />
-        <Button.Group style={{ marginBottom: '1em' }}>
-          <Button onClick={handleStartPassage} basic color="purple">Get Started</Button>
-          <Button.Or />
-          {
-            firstPassage ?
-              <Button onClick={() => { handleTrainPassage(firstPassage[0]) }} basic color="purple">Try An Example</Button>
-              : null
-          }
-        </Button.Group>
-        <Card.Group id="landing-cards" itemsPerRow={4}>
-          <Card className="card-landing" color="purple">
-            <Card.Content>
-              <Card.Header>LEARN</Card.Header>
-              <Card.Description>{card1}</Card.Description>
-              <Image src="views.gif" />
-            </Card.Content>
-          </Card>
-          <Card className="card-landing" color="purple">
-            <Card.Content>
-              <Card.Header>IT</Card.Header>
-              <Card.Description>{card2}</Card.Description>
-              <Image src="decimation.gif" />
-            </Card.Content>
-          </Card>
-          <Card className="card-landing" color="purple">
-            <Card.Content>
-              <Card.Header>BY</Card.Header>
-              <Card.Description>{card3}</Card.Description>
-            </Card.Content>
-          </Card>
-          <Card className="card-landing" color="purple">
-            <Card.Content>
-              <Card.Header>HEART</Card.Header>
-              <Card.Description>{card4}</Card.Description>
-              <Image src="hints.gif" />
-            </Card.Content>
-          </Card>
-        </Card.Group>
-      </Container>
+      <div id="landing">
+        <h2 id="tagLine">
+          {tagLineTwo}
+        </h2>
+        <h1 id="heartHeader">
+          {heartHeading[this.state.indexHeart]}
+        </h1>
+        <div id="home-buttons">
+          <Button.Group style={{ marginBottom: '1em' }}>
+            <Button onClick={handleStartPassage} basic color="purple">Get Started</Button>
+            <Button.Or />
+            {
+              firstPassage ?
+                <Button onClick={() => { handleTrainPassage(firstPassage[0]) }} basic color="purple">Try An Example</Button>
+                : null
+            }
+          </Button.Group>
+        </div>
+        <div id="landing-cards">
+            <div className="card-landing">
+              <div>
+                <h3>LEARN</h3>
+                <p>{card1}</p>
+                <img className="landing-card-img" src="views.gif" />
+              </div>
+            </div>
+            <div className="card-landing" color="purple">
+              <div>
+                <h3>IT</h3>
+                <p>{card2}</p>
+                <img className="landing-card-img" src="decimation.gif" />
+              </div>
+            </div>
+            <div className="card-landing" color="purple">
+              <div>
+                <h3>BY</h3>
+                <p>{card3}</p>
+                <img className="landing-card-img" src="profile.png" />
+              </div>
+            </div>
+            <div className="card-landing" color="purple">
+              <div>
+                <h3>HEART</h3>
+                <p>{card4}</p>
+                <img className="landing-card-img" src="hints.gif" />
+              </div>
+            </div>
+        </div>
+      </div>
     )
   }
 }
