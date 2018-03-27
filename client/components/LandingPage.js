@@ -8,16 +8,16 @@ import './LandingPage.css'
 
 
 const card1 = [
-  'Read full text at once or line-by-line',
+  'Read full text at once or line by line',
 ]
 const card2 = [
   'Letters disappear from your text depending on chosen difficulty level',
 ]
 const card3 = [
-  'Edit, save or delete your passages',
+  'Edit, delete or save passages on your profile.',
 ]
 const card4 = [
-  'Get hints when you are stuck',
+  'Hover your mouse over a word to get hints when you are stuck',
 ]
 
 class LandingPage extends Component {
@@ -85,6 +85,7 @@ class LandingPage extends Component {
             <Card.Content>
               <Card.Header>BY</Card.Header>
               <Card.Description>{card3}</Card.Description>
+              <Image src="profile.png" />
             </Card.Content>
           </Card>
           <Card className="card-landing" color="purple">
