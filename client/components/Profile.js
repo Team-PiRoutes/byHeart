@@ -48,6 +48,11 @@ export class Profile extends Component {
                   <Card.Content>
                     <Card.Header style={{ overflowWrap: 'break-word', padding: '0.5em' }}>
                       {passage.title}
+                      {
+                        passage.isPublic ?
+                          <Card.Meta>Public</Card.Meta>
+                          : <Card.Meta>Private</Card.Meta>
+                      }
                     </Card.Header>
                     <Card.Description style={{ overflowWrap: 'break-word' }}>
                       {passage.content.slice(0, 80).concat('(...)')}
