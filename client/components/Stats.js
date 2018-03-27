@@ -14,8 +14,6 @@ export class Stats extends Component {
       filterGraphByLevel: false,
       filterGraphByVersion: false
     }
-    this.makeEasier = this.makeEasier.bind(this)
-    this.makeHarder = this.makeHarder.bind(this)
     this.filterGraphByLevel = this.filterGraphByLevel.bind(this)
     this.filterGraphByVersion = this.filterGraphByVersion.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
@@ -30,23 +28,7 @@ export class Stats extends Component {
       this.props.loadRehearsals(this.props.userId, match.params.id)
     }
   }
-  makeEasier() {
-    const decimationLevel = this.state.decimationLevel
-    if (decimationLevel > 0) {
-      this.setState({
-        decimationLevel: decimationLevel - 1
-      })
-    }
-  }
 
-  makeHarder() {
-    const { decimationLevel } = this.state
-    if (decimationLevel < 10) {
-      this.setState({
-        decimationLevel: decimationLevel + 1
-      })
-    }
-  }
   filterGraphByLevel() {
     this.setState({ filterGraphByLevel: !this.state.filterGraphByLevel })
   }
@@ -56,11 +38,7 @@ export class Stats extends Component {
   handleInputChange = (event) => {
     this.setState({ decimationLevel: +event.target.value })
   }
-  handleKeyPress(event) {
 
-    if (event.code === HARDER) this.makeHarder()
-    else if (event.code === EASIER) this.makeEasier()
-  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.userId && this.props.userId === undefined) {
       this.props.loadRehearsals(nextProps.userId, nextProps.match.params.id)
