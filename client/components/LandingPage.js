@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { gotPassage } from '../store/passage'
 import history from '../history'
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
 
 
