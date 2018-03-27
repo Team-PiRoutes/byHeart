@@ -24,13 +24,26 @@ class GraphWrapper extends React.Component {
     super(props)
     this.filterDecimate = this.filterDecimate.bind(this)
     this.filterByVersion = this.filterByVersion.bind(this)
+    this.sufficientData = this.sufficientData.bind(this)
   }
+
+  sufficientData(toDisplayText) {
+    const { filterByLevel, filterByVersion } = this.props
+    console.log(toDisplayText, 'filterByLevel', filterByLevel, 'filterByVersion', filterByVersion)
+    if (toDisplayText && filterByLevel && filterByVersion) {
+      return `Insufficient data to display a graph at this difficulty level and passage version.`
+    } else if (toDisplayText && filterByLevel) {
+      return `Insufficient data to display a graph at this difficulty level.`
+    } else if (toDisplayText && filterByVersion) {
+      return `Insufficient data to display a graph for this passage version.`
+    }
+
+  }
+
   filterDecimate(level, data) { //eslint-disable-line class-methods-use-this
     let filteredData = []
     data.forEach(dataPoint => {
-
       if (dataPoint.decimationLevel === level) {
-
         filteredData.push(dataPoint)
       }
     })
@@ -45,7 +58,6 @@ class GraphWrapper extends React.Component {
   }
 
   filterByVersion(version, data) {//eslint-disable-line class-methods-use-this
-    console.log('version')
     let filteredData = data
       .filter(dataPoint => (dataPoint.passageUpdatedAt === version))
     return filteredData
@@ -53,21 +65,37 @@ class GraphWrapper extends React.Component {
 
   render() {
 
-    const { data, unsavedDataPoint, decimationLevel, filterByLevel, filterByVersion, passage } = this.props
+    const { data, unsavedDataPoint, decimationLevel,
+      filterByLevel, filterByVersion, passage } = this.props
     const propertyToBeY = this.props.yName || 'y',
-      xLabel = this.props.xLabel || 'Decimation Level'
+      xLabel = this.props.xLabel || 'Difficulty Level'
 
     let presentationData = unsavedDataPoint === undefined ? [...data] :
       [...data, unsavedDataPoint]
+
     if (filterByLevel) { presentationData = this.filterDecimate(decimationLevel, presentationData) }
     if (filterByVersion && passage.id) { presentationData = this.filterByVersion(passage.updatedAt, presentationData) }
-    presentationData = this.setXandY(presentationData, propertyToBeY)
 
+    presentationData = this.setXandY(presentationData, propertyToBeY)
     const enoughDataForGraph = presentationData.length > 1
+    let noGraphMessage = this.sufficientData(!enoughDataForGraph)
+
     return (
       <div>
         {
-          enoughDataForGraph && <GraphLargeView data={presentationData} xLabel={xLabel} />
+          enoughDataForGraph ? <GraphLargeView
+            data={presentationData}
+            xLabel={xLabel} /> :
+            <h4 style={{
+              margin: '15px 10%',
+              padding: '30px 10px',
+              textAlign: 'center',
+              border: 'solid',
+              borderWidth: '2px',
+              borderRadius: '10px',
+              borderColor: 'purple'
+            }}> {noGraphMessage}</h4>
+
         }
       </div>
     )

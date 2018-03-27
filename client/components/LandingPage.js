@@ -4,7 +4,6 @@ import { gotPassage } from '../store/passage'
 import history from '../history'
 import { Button, Container, Header, Card, Image } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
-import './LandingPage.css'
 
 
 const card1 = [

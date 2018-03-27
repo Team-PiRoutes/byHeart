@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout, gotPassage } from '../store'
 import { Menu, Button } from 'semantic-ui-react'
-import './Navbar.css'
 
 
 const Navbar = ({ handleClick, isLoggedIn, handleClickNew }) => (

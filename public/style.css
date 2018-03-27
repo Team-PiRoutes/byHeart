@@ -96,3 +96,172 @@ h1 {
     top: -50px;
   }
 }
+
+#public-private-toggle input:checked~.box:before,  #public-private-toggle input:checked~label:before {
+  background-color: purple!important;
+  color: rgba(0,0,0,.6);
+}
+
+#public-private-toggle {
+  margin: 0 .25rem 0 .25rem;
+  padding: 0;
+  float: right;
+  height: 35px;
+  background-color: #e0e1e2;
+  line-height: 1rem;
+  border: none;
+}
+
+#public-private-toggle label {
+  color: rgba(0,0,0,.6);
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+#public-private-toggle>.ui.toggle.checkbox {
+  margin-top: 8px;
+}
+
+#flex-buttons-form {
+  justify-content: flex-end;
+  display: flex;
+  margin: 1rem 0;
+}
+
+#formTitle {
+  font-size: 2rem;
+}
+
+#formContent {
+  font-size: 1.5rem;
+}
+
+#tagLine {
+  font-size: 1.7em;
+  font-weight: normal;
+  margin-top: 1.7em;
+}
+
+#heartHeader {
+  font-size: 4em;
+  font-weight: normal;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.navButton {
+  margin-left: '0.5em'
+}
+
+.documentTitle {
+  text-align: center;
+  font-size: 2em;
+  font-family: PancakeFont, FallbackFont, sans-serif;
+  color: BLACK;
+}
+
+.corner-button {
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  z-index: 10;
+}
+
+#training-page {
+  position: relative;
+}
+
+.question {
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  right: 4rem;
+  z-index: 10;
+}
+
+.lines {
+  font-size: 1.85rem;
+  font-family: PancakeFont, FallbackFont, sans-serif;
+  color: black;
+  line-height: 2.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.blurred {
+  filter: blur(3px);
+  color: gray;
+}
+
+.card {
+  padding: 1rem 2rem;
+}
+
+
+button.button-next {
+  background-color: #eee;
+  color: lightgray;
+  font-size: 1.5em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.passageText {
+  position: relative;
+  line-height: 3rem;
+  font-size: 1.85rem;
+  margin-bottom: 8px;
+  font-family: 'Roboto Mono', sans-serif;
+  color: #333;
+  letter-spacing: .034em
+}
+
+.hintBox {
+  font-size: 3em
+}
+
+.hintBox {
+  font-size: .8em
+}
+
+button.start {
+  background-color: #a333c8;
+  color: white;
+  font-size: 2.5rem;
+  padding: 2rem 2rem;
+  border-radius: 0.5rem;
+}
+
+div.button-wrapper {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+/* PassageTrainer css */
+
+.decimate {
+  display: block;
+  background-color: white;
+  text-align: center;
+}
+
+#slideBar {
+  width: 80%;
+  min-width: 200pxs;
+}
+
+.passageTextContainer {
+  font-size: 1.85rem;
+  font-family: 'Roboto Mono', sans-serif;
+  color: black;
+  line-height: 2.4rem;
+  padding: 1rem 2rem;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  height: 100%;
+  max-width: 900px;
+}

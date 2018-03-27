@@ -29,7 +29,9 @@ class Finished extends Component {
   }
 
   render() {
-    const { saveRehearsal, isRehearsalSaved, rehearsals, currentRehearsal, userId, passage, decimationLevel } = this.props
+    const { saveRehearsal, isRehearsalSaved,
+      rehearsals, currentRehearsal, userId,
+      passage, decimationLevel } = this.props
 
     let time = timer(this.props.time)
     //react-vis will not display single data point charts.rehearsals &&
@@ -87,14 +89,16 @@ class Finished extends Component {
             </Button>}
         <DifficultyLabel decimateLevel={decimationLevel} />
         {
-          canShowChart && <GraphWrapper
+          canShowChart ? <GraphWrapper
             data={rehearsals}
             filterByLevel={this.state.filterGraphBySameLevel}
             filterByVersion={this.state.filterGraphBySameVersion}
             yName={'elapsedTime'}
             unsavedDataPoint={currentRehearsal}
-            decimationLevel={decimationLevel} />
+            decimationLevel={decimationLevel} /> :
+            <p>Insufficient data to show a chart.</p>
         }
+
 
       </div>
     )
