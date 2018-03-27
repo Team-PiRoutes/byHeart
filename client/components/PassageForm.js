@@ -3,7 +3,6 @@ import { Form, Input, TextArea, Button, Label, Segment, Checkbox } from 'semanti
 import { connect } from 'react-redux'
 import { fetchPassage, updatePassage, gotPassage, postPassage } from '../store'
 import history from '../history'
-import './PassageForm.css'
 
 class PassageForm extends Component {
   constructor(props) {
@@ -27,9 +26,9 @@ class PassageForm extends Component {
       if (!passage.id || passage.id !== idFromParams) {
         loadInitialData(idFromParams)
       }
-      if (passage.id && passage.authorId !== userId) {
-        clonePassage(passage)
-      }
+      // if (passage.id && passage.authorId !== userId) {
+      //   clonePassage(passage)
+      // }
     } else if (path === '/newpassage') {
       history.push('/passages/new')
     }

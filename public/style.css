@@ -128,3 +128,11 @@ h1 {
   display: flex;
   margin: 1rem 0;
 }
+
+#formTitle {
+  font-size: 2rem;
+}
+
+#formContent {
+  font-size: 1.5rem;
+}
