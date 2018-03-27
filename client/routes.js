@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Login, Signup, Profile, Training, LandingPage, PassageForm, GraphWrapper, BrowsePassages, Stats } from './components'
+import { Login, Signup, Profile, Training, LandingPage, PassageForm, BrowsePassages, Stats } from './components'
 
 import { me, fetchPassages } from './store'
 
