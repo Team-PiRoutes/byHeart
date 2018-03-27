@@ -25,7 +25,7 @@ export class Stats extends Component {
 
   render() {
 
-    const { passage } = this.props
+    const { passage, rehearsals } = this.props
 
     return (
       <div>
