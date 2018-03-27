@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages, removePassage } from '../store/'
-import { Card, Button, Icon, Label, Popup, Confirm } from 'semantic-ui-react'
+import { Card, Button, Icon, Confirm } from 'semantic-ui-react'
 import history from '../history'
 
 export class Profile extends Component {
@@ -24,7 +24,7 @@ export class Profile extends Component {
   }
 
   render() {
-    const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage, handleDeletePassage } = this.props
+    const { passages, user, handleNewPassage, handleTrainPassage, handleEditPassage, handleDeletePassage, handlePassageStats } = this.props
     const filteredPassages = passages.filter(passage => passage.authorId === user.id)
 
     return (
@@ -86,20 +86,17 @@ export class Profile extends Component {
                       onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
                       size="small"
                     />
-                    <Popup
-                      trigger={
-                        <Button as="div" size="mini" floated="right" labelPosition="right">
-                          <Button color="purple">
-                            <Icon name="clock" size="large" />
-                          </Button>
-                          <Label as="a" basic color="purple" pointing="left">00:00:08:4</Label>
-                        </Button>
-                      }
-                      content="Last time you read this passage in this amount of time"
-                      position="bottom center"
-                      on="hover"
-                      inverted
-                    />
+                    <Button
+                      floated="right"
+                      color="purple"
+                      size="mini"
+                      className="cardButton"
+                      onClick={() => { handlePassageStats(passage) }}
+                    >
+                      <Button.Content>
+                        <Icon name="bar graph" size="large" />
+                      </Button.Content>
+                    </Button>
                   </Card.Content>
                 </Card>
               )
@@ -139,6 +136,11 @@ const mapDispatch = (dispatch) => {
     handleDeletePassage(id) {
       event.preventDefault()
       dispatch(removePassage(id))
+    },
+    handlePassageStats(passage) {
+      event.preventDefault()
+      dispatch(gotPassage(passage))
+      history.push(`/passages/${passage.id}/stats`)
     }
   }
 }

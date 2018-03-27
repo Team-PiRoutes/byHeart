@@ -98,7 +98,7 @@ export default class TestingGraphView extends React.Component {
           />
         </div>
         <p style={{ size: '2.6em', textAlign: 'center', color: 'purple' }}>
-          {`Current Level: ${decimateLevel}`}
+          {`Current Level: ${this.state.decimateLevel}`}
         </p>
         {
           canShowChart && <GraphWrapper
