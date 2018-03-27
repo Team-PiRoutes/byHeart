@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages, removePassage } from '../store/'
-import { Card, Button, Icon, Link, Confirm } from 'semantic-ui-react'
+import { Card, Button, Icon, Confirm } from 'semantic-ui-react'
 import history from '../history'
 
 export class Profile extends Component {
