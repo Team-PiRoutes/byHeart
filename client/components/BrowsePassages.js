@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchPassages } from '../store'
-import { Card, Button, Icon, Label, Popup } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 // import history from '../history'
