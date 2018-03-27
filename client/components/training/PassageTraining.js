@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Sticky, Checkbox } from 'semantic-ui-react'
 import './PassageTrainer.css'
 import TextWithLineBreaks from './TextWithLineBreaks'
+import DifficultyLabel from './DifficultyLabel'
 
 const HARDER = 'ArrowRight'
 const EASIER = 'ArrowLeft'
@@ -42,8 +43,8 @@ class PassageTraining extends Component {
   }
 
   handleKeyPress(event) {
-    console.log('event: ', event.code)
-    console.log('this.makeHarder: ', this.makeHarder)
+    // console.log('event: ', event.code)
+    // console.log('this.makeHarder: ', this.makeHarder)
     if (event.code === HARDER) this.makeHarder()
     else if (event.code === EASIER) this.makeEasier()
   }
@@ -88,7 +89,7 @@ class PassageTraining extends Component {
     return (
       <div className="container">
         <div id="stickyZone" ref={this.handleContextRef}>
-          <Sticky context={contextRef} >
+          <Sticky context={contextRef} id="slidebarWrapper" >
             <div className="decimate">
               <input
                 id="slideBar"
@@ -101,6 +102,7 @@ class PassageTraining extends Component {
               />
               <Checkbox className="checkbox-spaces" label="No spaces?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
             </div>
+            <DifficultyLabel decimateLevel={this.state.decimateLevel} />
           </Sticky>
 
           <div className="passageTextContainer">

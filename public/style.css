@@ -79,3 +79,20 @@ h1 {
 .description {
   padding-bottom: 0.5em;
 }
+
+@media print {
+  .ui.borderless.stackable.top.fixed.navbar.menu, #slidebarWrapper {
+    display: none;
+    height: 0;
+  }
+  .corner-button, .question {
+    display: none;
+  }
+
+  h3.documentTitle {
+    position: absolute;
+    margin-top: 0;
+    z-index: 10;
+    top: -50px;
+  }
+}

@@ -19,14 +19,13 @@ function wordHint(decimatedCollection, level, index) { // we can change what is 
 
 function individualWordHint(hintArray, level) {
   const current = hintArray[level]
-  console.log('current = hintArray[level]', current, ' = ', hintArray[level])
   if (current === hintArray[0]) {
     return (
       { hintLevel: 0, hint: hintArray[0] }
     )
   }
   for (let i = level - 1; i > 0; i--) {
-   // console.log('current', current, '  hintArray[level]', hintArray[i], 'word ', hintArray[0])
+    // console.log('current', current, '  hintArray[level]', hintArray[i], 'word ', hintArray[0])
     if (current !== hintArray[i]) {
       return ({
         hintLevel: i, hint: hintArray[i]

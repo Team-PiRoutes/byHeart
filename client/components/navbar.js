@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import history from '../history'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { logout } from '../store'
+import { logout, gotPassage } from '../store'
 import { Menu, Button } from 'semantic-ui-react'
 import './Navbar.css'
 
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, handleClickNew }) => (
   <Menu borderless stackable className="navbar" fixed="top">
     <Menu.Menu>
       {/*<Menu.Item as="a" header>
@@ -26,6 +26,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Menu.Menu position="right">
         {/* The navbar will show these links after you log in */}
         <Menu.Item>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages/new" href="#" onClick={handleClickNew}>New</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages">Browse</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/profile">Profile</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/">Home</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/" href="#" onClick={handleClick}>Logout</Button>
@@ -35,6 +37,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Menu.Menu position="right">
         {/* The navbar will show these links before you log in */}
         <Menu.Item>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages/new">New</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/passages">Browse</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/">Home</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/login">Login</Button>
           <Button className="navButton" style={{ marginLeft: '0.5em' }} as={Link} to="/signup">Sign Up</Button>
         </Menu.Item>
@@ -56,6 +61,10 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+    handleClickNew() {
+      dispatch(gotPassage({}))
+      history.push('/passages/new')
     }
   }
 }
