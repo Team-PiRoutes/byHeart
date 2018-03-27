@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { buildDecimationLevelArrays } from '../../utils/decimate'
-import './SpannedText.css'
 import TipText from './TipText'
 
 

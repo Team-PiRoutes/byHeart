@@ -5,7 +5,6 @@ import { fetchPassage } from '../store'
 import PassageTraining from './training/PassageTraining'
 import LineByLineTrainer from './training/LineByLineTrainer'
 import Instructions from './instructions'
-import './Training.css'
 import history from '../history'
 
 const handleBackClick = (props) => {

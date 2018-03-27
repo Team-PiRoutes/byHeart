@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Checkbox } from 'semantic-ui-react'
-import './StartButton.css'
 import { decimateString } from '../../utils/decimate'
 
 const StartButton = (props) => {
