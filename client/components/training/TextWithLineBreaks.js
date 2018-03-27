@@ -1,6 +1,5 @@
 import React from 'react'
 import SpannedText from './SpannedText'
-import './SpannedText.css'
 const TextWithLineBreaks = (props) => {
   const { text } = props
   const lines = text.split('\n')
