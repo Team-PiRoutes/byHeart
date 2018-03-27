@@ -88,19 +88,19 @@ class PassageTraining extends Component {
     return (
       <div className="container">
         <div id="stickyZone" ref={this.handleContextRef}>
-          <Sticky context={contextRef} id="slidebarWrapper" >
-            <div className="decimate">
-              <input
-                id="slideBar"
-                min={0}
-                max={10}
-                onChange={this.handleInputChange}
-                type="range"
-                value={this.state.decimateLevel}
-                ref={(input) => { this.slideBar = input }}
-              />
-              <Checkbox className="checkbox-spaces" label="No spaces?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
-            </div>
+          <div className="decimate">
+            <input
+              id="slideBar"
+              min={0}
+              max={10}
+              onChange={this.handleInputChange}
+              type="range"
+              value={this.state.decimateLevel}
+              ref={(input) => { this.slideBar = input }}
+            />
+            <Checkbox className="checkbox-spaces" label="No spaces?" onChange={this.handleToggleHardSpace} checked={hideHardSpace} />
+          </div>
+          <Sticky context={contextRef} offset={46} id="slidebarWrapper" >
             <DifficultyLabel decimateLevel={this.state.decimateLevel} />
           </Sticky>
 
