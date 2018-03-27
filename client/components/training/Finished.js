@@ -76,7 +76,7 @@ class Finished extends Component {
             color={this.state.filterGraphBySameLevel ? 'purple' : null}
           >
             Show Same Level Only
-        </Button>}
+          </Button>}
         {canShowChart &&
           <Button
             onClick={this.filterGraphBySameVersion}
@@ -84,7 +84,8 @@ class Finished extends Component {
             color={this.state.filterGraphBySameVersion ? 'purple' : null}
           >
             Show Same Passage Version Only
-        </Button>}
+            </Button>}
+        <DifficultyLabel decimateLevel={decimationLevel} />
         {
           canShowChart && <GraphWrapper
             data={rehearsals}
@@ -94,7 +95,6 @@ class Finished extends Component {
             unsavedDataPoint={currentRehearsal}
             decimationLevel={decimationLevel} />
         }
-        <DifficultyLabel decimateLevel={decimationLevel} />
 
       </div>
     )
