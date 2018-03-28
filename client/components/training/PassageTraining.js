@@ -86,7 +86,7 @@ class PassageTraining extends Component {
     }
 
     return (
-      <div className="container">
+      <div className="passage-container">
         <div id="stickyZone" ref={this.handleContextRef}>
           <div className="decimate">
             <input

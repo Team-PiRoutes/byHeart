@@ -31,7 +31,7 @@ class LandingPage extends Component {
   componentDidMount() {
     setInterval(() => {
       this.setState({
-        indexHeart: (this.state.indexHeart + 1) % 7,
+        indexHeart: (this.state.indexHeart + 1) % 6,
         indexTag: (this.state.indexTag + 1) % 11
       })
     }, 1200)
@@ -40,7 +40,7 @@ class LandingPage extends Component {
   render() {
     const { passages, handleTrainPassage, handleStartPassage } = this.props
     const firstPassage = passages.filter(passage => passage.id === 1)
-    const heartHeading = ['By Heart', 'By Hear', 'By Hea', 'By He', 'By H', 'By ', 'By ❤️']
+    const heartHeading = ['By Heart', 'By Hear', 'By Hea', 'By He', 'By H', 'by❤️']
     const str = "It doesn't have to be hard to learn your lines"
     const tagLineTwo = decimateString(str, this.state.indexTag)
 
