@@ -21,6 +21,8 @@ class GraphWrapper extends React.Component {
       return `Insufficient data to display a graph at this difficulty level.`
     } else if (toDisplayText && filterByVersion) {
       return `Insufficient data to display a graph for this passage version.`
+    } else if (toDisplayText) {
+      return 'Insufficient data to display a graph. Save more practice times to receive data.'
     }
 
   }
