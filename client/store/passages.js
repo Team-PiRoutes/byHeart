@@ -53,7 +53,7 @@ export const fetchPassage = (id) =>
       })
       .catch(err => {
         history.push('/error')
-        // console.error(err)
+        console.error(err)
       })
 
 
