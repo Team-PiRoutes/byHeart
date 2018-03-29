@@ -16,7 +16,13 @@ router.get('/', (req, res, next) => {
 // GET /api/passages/:id
 router.get('/:id', (req, res, next) => {
   Passage.findById(req.params.id)
-    .then(passage => res.json(passage))
+    .then(passage => {
+      if (passage.isPublic || (req.user && req.user.id === passage.authorId)) {
+        res.json(passage)
+      } else {
+        res.status(401).send('Unauthorized. Passage is private.')
+      }
+    })
     .catch(next)
 })
 
