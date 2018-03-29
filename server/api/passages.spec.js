@@ -96,11 +96,11 @@ describe('Passage routes', () => {
 
     it('should get one passage', () => {
       return request(app)
-        .get('/api/passages/1')
+        .get('/api/passages/2')
         .expect(200)
         .then(res => {
-          expect(res.body.title).to.equal('speech')
-          expect(res.body.content).to.equal('Several paragraphs of golden words')
+          expect(res.body.title).to.equal('monolog')
+          expect(res.body.content).to.equal('Extremely dramatic lines')
         })
     })
   })
