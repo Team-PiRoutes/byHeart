@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { gotPassage, fetchPassages, removePassage } from '../store/'
-import { Card, Button, Icon, Confirm } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
 import history from '../history'
 
 export class Profile extends Component {
@@ -75,22 +75,13 @@ export class Profile extends Component {
                       animated="vertical"
                       size="mini"
                       className="cardButton"
-                      onClick={this.show}
+                      onClick={() => { handleDeletePassage(passage.id) }}
                     >
                       <Button.Content hidden>Delete</Button.Content>
                       <Button.Content visible>
                         <Icon name="trash" size="large" />
                       </Button.Content>
                     </Button>
-                    <Confirm
-                      open={this.state.open}
-                      content="Are you sure you want to delete this passage?"
-                      cancelButton="Never mind"
-                      confirmButton="Let's do it"
-                      onCancel={this.handleCancel}
-                      onConfirm={() => { handleDeletePassage(passage.id); this.handleConfirm() }}
-                      size="small"
-                    />
                     <Button
                       floated="right"
                       color="purple"

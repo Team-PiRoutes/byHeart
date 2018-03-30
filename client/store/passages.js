@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { passPassage } from './passage'
+import history from '../history'
 
 const GOT_PASSAGES = 'GOT_PASSAGES'
 const ADD_PASSAGE = 'ADD_PASSAGE'
@@ -43,11 +44,18 @@ export const fetchPassages = () =>
 export const fetchPassage = (id) =>
   dispatch =>
     axios.get(`/api/passages/${id}`)
-      .then(res => res.data)
+      .then(res => {
+        return res.data
+      })
       .then(passage => {
         dispatch(gotUpdatedPassage(passage))
         dispatch(passPassage(passage))
       })
+      .catch(err => {
+        history.push('/error')
+        console.error(err)
+      })
+
 
 export const postPassage = (passage) =>
   dispatch =>

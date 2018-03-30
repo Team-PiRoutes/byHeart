@@ -89,7 +89,7 @@ class LandingPage extends Component {
               <div>
                 <h3>HEART</h3>
                 <p>{card4}</p>
-                <img className="landing-card-img" src="hints.gif" />
+                <img className="landing-card-img" src="hint.gif" />
               </div>
             </div>
         </div>
