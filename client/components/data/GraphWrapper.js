@@ -9,7 +9,7 @@ export const NOT_ENOUGH_DIFFICULTY_LEVEL = `Insufficient data to display a graph
 export const NOT_ENOUGH_DIFFICULTY_AND_VERSION = `Insufficient data to display a graph at this difficulty level and passage version.`
 export function sufficientData(toDisplayText, filterByLevel, filterByVersion) {
 
-  // console.log(toDisplayText, 'filterByLevel', filterByLevel, 'filterByVersion', filterByVersion)
+
   if (toDisplayText && filterByLevel && filterByVersion) {
     return NOT_ENOUGH_DIFFICULTY_AND_VERSION
   } else if (toDisplayText && filterByLevel) {

@@ -1,5 +1,5 @@
 
-
+/* eslint-disable */
 import { expect } from 'chai'
 import React from 'react'
 import enzyme, { shallow } from 'enzyme'
@@ -16,7 +16,6 @@ import {
   NOT_ENOUGH_DIFFICULTY_AND_VERSION,
 
 } from './GraphWrapper'
-
 const adapter = new Adapter()
 
 
