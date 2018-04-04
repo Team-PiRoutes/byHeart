@@ -49,12 +49,10 @@ export class Stats extends Component {
     const { rehearsals, passage } = this.props
     const canShowChart = rehearsals && rehearsals.length > 0 &&
       this.props.passage.id !== undefined
-    console.log('Stats view this.state.filterGraphByVersion ', this.state.filterGraphByVersion)
 
     return (
       <div>
         <h2 style={{ textAlign: 'center' }}>{passage.title}</h2>
-
         <div className="container" style={{ minHeight: '200px', border: '1px solid #d4d4d5', background: '#fff' }}>
           {canShowChart &&
             <Button
