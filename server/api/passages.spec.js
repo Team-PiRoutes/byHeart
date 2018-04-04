@@ -52,7 +52,6 @@ const userOther = {
 
 describe('Passage routes', () => {
   let dbUsers = []
-  let dbPassages = []
 
   before(async () => {
     await db.sync({ force: true })
@@ -66,7 +65,7 @@ describe('Passage routes', () => {
       return passage
     })
 
-    dbPassages = await Passage.bulkCreate(passages)
+    await Passage.bulkCreate(passages)
   })
 
   describe('with guest user', () => {
