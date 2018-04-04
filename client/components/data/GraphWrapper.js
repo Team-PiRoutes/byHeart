@@ -41,7 +41,7 @@ export function setXandY(data, yName) {
 }
 
 
-export function filterByVersion(version, data) {
+export function filterVersion(version, data) {
   let filteredData = data
     .filter(dataPoint => (dataPoint.passageUpdatedAt === version))
   return filteredData
@@ -58,7 +58,7 @@ export const GraphWrapper = ({ data, unsavedDataPoint, decimationLevel,
     [...data, unsavedDataPoint]
   console.log('data', presentationData)
   if (filterByLevel) { presentationData = filterDecimate(decimationLevel, presentationData) }
-  if (filterByVersion && passage.id) { presentationData = filterByVersion(passage.updatedAt, presentationData) }
+  if (filterByVersion && passage.id) { presentationData = filterVersion(passage.updatedAt, presentationData) }
 
   presentationData = setXandY(presentationData, propertyToBeY)
   const enoughDataForGraph = presentationData.length > 1

@@ -8,7 +8,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import {
   filterDecimate,
   setXandY,
-  filterByVersion,
+  filterVersion,
   sufficientData,
   NOT_ENOUGH_ATTEMPTS,
   NOT_ENOUGH_VERSION,
@@ -149,7 +149,7 @@ describe('GraphWrapper: ', () => {
       })
 
     })
-    describe('filterByVersion function ', () => {
+    describe('filterVersion function ', () => {
       const buildData = (array) => {
         for (let i = 0; i < 5; i++) {
           array.push({ x: i, z: i * 2, a: i * -2, passageUpdatedAt: i % 2 })
@@ -158,8 +158,8 @@ describe('GraphWrapper: ', () => {
       }
       let array = []
       const testArray = buildData(array)
-      const filteredV0 = filterByVersion(0, testArray)
-      const filteredV1 = filterByVersion(1, testArray)
+      const filteredV0 = filterVersion(0, testArray)
+      const filteredV1 = filterVersion(1, testArray)
 
       it('does not mutate the array', () => {
         expect(testArray).to.not.equal(filteredV0)
@@ -168,15 +168,15 @@ describe('GraphWrapper: ', () => {
 
       it('Eliminate only the dataPoints that do not match version provided', () => {
         let version = 0
-        let filteredArray = filterByVersion(version, testArray)
+        let filteredArray = filterVersion(version, testArray)
         expect(filteredArray.length).to.be.equal(3)
         expect(filteredArray[0].passageUpdatedAt).to.be.equal(version)
         version = 1
-        filteredArray = filterByVersion(version, testArray)
+        filteredArray = filterVersion(version, testArray)
         expect(filteredArray.length).to.be.equal(2)
         expect(filteredArray[0].passageUpdatedAt).to.be.equal(version)
         version = 2
-        filteredArray = filterByVersion(version, testArray)
+        filteredArray = filterVersion(version, testArray)
         expect(filteredArray.length).to.be.equal(0)
       })
     })
