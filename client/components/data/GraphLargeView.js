@@ -1,5 +1,6 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   XAxis,
   FlexibleWidthXYPlot,
@@ -27,7 +28,6 @@ class GraphLargeView extends React.Component {
     }
     this.containerStyle = {
       position: relative,
-
       margin: '20px',
       marginBottom: '5px',
       maxWidth: '100%'
@@ -97,7 +97,6 @@ class GraphLargeView extends React.Component {
   showTime(event) {
     const time = this.msToMinSec(event.y)
     this.setState({ time })
-    // console.log('showTime event', e)
   }
   render() {
     const { data, xLabel, unsavedDataPoint } = this.props
@@ -129,6 +128,11 @@ class GraphLargeView extends React.Component {
 
     )
   }
+}
+GraphLargeView.propTypes = {
+  data: PropTypes.array.isRequired,
+  unsavedDataPoint: PropTypes.object,
+  xLabel: PropTypes.string,
 }
 
 export default GraphLargeView
