@@ -56,10 +56,10 @@ export const GraphWrapper = ({ data, unsavedDataPoint, decimationLevel,
 }) => {
   const propertyToBeY = yName || 'y'
   xLabel = xLabel || 'Difficulty Level'
-  console.dir(toFilterByVersion)
+
   let presentationData = unsavedDataPoint === undefined ? [...data] :
     [...data, unsavedDataPoint]
-  // console.log('data', presentationData)
+
   if (toFilterByLevel) { presentationData = filterDecimate(decimationLevel, presentationData) }
   if (toFilterByVersion && passage.id) { presentationData = filterVersion(passage.updatedAt, presentationData) }
 

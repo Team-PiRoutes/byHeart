@@ -16,7 +16,7 @@ import {
 } from './GraphWrapper'
 const adapter = new Adapter()
 
-console.log('#########', sufficientData)
+
 enzyme.configure({ adapter })
 
 
