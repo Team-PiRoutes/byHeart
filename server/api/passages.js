@@ -28,16 +28,25 @@ router.get('/:id', (req, res, next) => {
 
 // POST /api/passages/
 router.post('/', (req, res, next) => {
-  Passage.create(req.body)
-    .then(newPassage => res.status(201).json(newPassage))
-    .catch(next)
+  if (req.user && req.user.id === req.body.authorId) {
+    Passage.create(req.body)
+      .then(newPassage => res.status(201).json(newPassage))
+      .catch(next)
+  } else {
+    res.status(401).send('Unauthorized. User Id doesn\'t match.')
+  }
 })
 
 // PUT /api/passages/
 router.put('/:id', (req, res, next) => {
   Passage.findById(req.params.id)
     .then(passage => {
-      return passage.update(req.body)
+      if (passage && req.user && req.user.id === passage.authorId) {
+        res.status(201)
+        return passage.update(req.body)
+      } else {
+        res.status(401).send('Unauthorized. Passage is private.')
+      }
     })
     .then(passage => res.json(passage))
     .catch(next)
@@ -46,8 +55,14 @@ router.put('/:id', (req, res, next) => {
 //DELETE /api/passages/:id
 router.delete('/:id', (req, res, next) => {
  Passage.findById(req.params.id)
-  .then(passage => passage.destroy())
-  .then(data => res.status(204).json(data))
+  .then(passage => {
+    if (passage && req.user && req.user.id === passage.authorId) {
+      return passage.destroy()
+        .then(data => res.status(204).json(data))
+    } else {
+      res.status(401).send('Unauthorized. Passage is private.')
+    }
+  })
   .catch(next)
 })
 
