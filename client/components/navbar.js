@@ -36,7 +36,7 @@ const Navbar = ({ handleClick, isLoggedIn, handleClickNew }) => (
       <Menu.Menu position="right" id="menu-right">
         {/* The navbar will show these links before you log in */}
         <Menu.Item>
-          <Button className="navButton" style={{ marginLeft: '0.5rem' }} as={Link} to="/passages/new">New</Button>
+          <Button className="navButton" style={{ marginLeft: '0.5rem' }} as={Link} to="/passages/new" href="#" onClick={handleClickNew}>New</Button>
           <Button className="navButton" style={{ marginLeft: '0.5rem' }} as={Link} to="/passages">Browse</Button>
           <Button className="navButton" style={{ marginLeft: '0.5rem' }} as={Link} to="/">Home</Button>
           <Button className="navButton" style={{ marginLeft: '0.5rem' }} as={Link} to="/login">Login</Button>
