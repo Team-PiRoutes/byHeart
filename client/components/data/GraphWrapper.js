@@ -1,18 +1,21 @@
 
 import React from 'react'
 import GraphLargeView from './GraphLargeView'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 export const NOT_ENOUGH_ATTEMPTS = `Insufficient data to display a graph. Save more practice times to receive data.`
 export const NOT_ENOUGH_VERSION = `Insufficient data to display a graph for this passage version.`
 export const NOT_ENOUGH_DIFFICULTY_LEVEL = `Insufficient data to display a graph at this difficulty level.`
 export const NOT_ENOUGH_DIFFICULTY_AND_VERSION = `Insufficient data to display a graph at this difficulty level and passage version.`
-export function sufficientData(toDisplayText, filterByLevel, filterByVersion) {
+
+export function sufficientData(toDisplayText, toFilterByLevel, filterByVersion) {
 
 
-  if (toDisplayText && filterByLevel && filterByVersion) {
+  if (toDisplayText && toFilterByLevel && filterByVersion) {
+
     return NOT_ENOUGH_DIFFICULTY_AND_VERSION
-  } else if (toDisplayText && filterByLevel) {
+  } else if (toDisplayText && toFilterByLevel) {
     return NOT_ENOUGH_DIFFICULTY_LEVEL
   } else if (toDisplayText && filterByVersion) {
     return NOT_ENOUGH_VERSION
@@ -49,20 +52,20 @@ export function filterVersion(version, data) {
 
 
 export const GraphWrapper = ({ data, unsavedDataPoint, decimationLevel,
-  filterByLevel, filterByVersion, passage, yName, xLabel
+  toFilterByLevel, toFilterByVersion, passage, yName, xLabel
 }) => {
   const propertyToBeY = yName || 'y'
   xLabel = xLabel || 'Difficulty Level'
-
+  console.dir(toFilterByVersion)
   let presentationData = unsavedDataPoint === undefined ? [...data] :
     [...data, unsavedDataPoint]
-  console.log('data', presentationData)
-  if (filterByLevel) { presentationData = filterDecimate(decimationLevel, presentationData) }
-  if (filterByVersion && passage.id) { presentationData = filterVersion(passage.updatedAt, presentationData) }
+  // console.log('data', presentationData)
+  if (toFilterByLevel) { presentationData = filterDecimate(decimationLevel, presentationData) }
+  if (toFilterByVersion && passage.id) { presentationData = filterVersion(passage.updatedAt, presentationData) }
 
   presentationData = setXandY(presentationData, propertyToBeY)
   const enoughDataForGraph = presentationData.length > 1
-  let noGraphMessage = sufficientData(!enoughDataForGraph, filterByLevel, filterByVersion)
+  let noGraphMessage = sufficientData(!enoughDataForGraph, toFilterByLevel, toFilterByVersion)
 
   return (
     <div>
@@ -103,11 +106,15 @@ const mapDispatchToProps = (dispatch) => {
       return filterDecimate(...arguments)
     }, setXandY() {
       return setXandY(...arguments)
-    }, filterByVersion() {
-      return filterByVersion(...arguments)
+    }, filterVersion() {
+      return filterVersions(...arguments)
     }
   }
 }//filterDecimate, setXandY, filterByVersion
-
+GraphLargeView.propTypes = {
+  data: PropTypes.array.isRequired,
+  unsavedDataPoint: PropTypes.object,
+  xLabel: PropTypes.string,
+}
 
 export default connect(mapState, mapDispatchToProps)(GraphWrapper)

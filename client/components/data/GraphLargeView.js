@@ -1,5 +1,6 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   XAxis,
   FlexibleWidthXYPlot,
@@ -129,6 +130,11 @@ class GraphLargeView extends React.Component {
 
     )
   }
+}
+GraphLargeView.propTypes = {
+  data: PropTypes.array.isRequired,
+  unsavedDataPoint: PropTypes.object,
+  xLabel: PropTypes.string,
 }
 
 export default GraphLargeView

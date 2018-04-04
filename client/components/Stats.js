@@ -49,7 +49,7 @@ export class Stats extends Component {
     const { rehearsals, passage } = this.props
     const canShowChart = rehearsals && rehearsals.length > 0 &&
       this.props.passage.id !== undefined
-
+    console.log('Stats view this.state.filterGraphByVersion ', this.state.filterGraphByVersion)
 
     return (
       <div>
@@ -92,8 +92,8 @@ export class Stats extends Component {
           {
             canShowChart && <GraphWrapper
               data={rehearsals}
-              filterByLevel={this.state.filterGraphByLevel}
-              filterByVersion={this.state.filterGraphByVersion}
+              toFilterByLevel={this.state.filterGraphByLevel}
+              toFilterByVersion={this.state.filterGraphByVersion}
               yName={'elapsedTime'}
               decimationLevel={this.state.decimationLevel} />
           }

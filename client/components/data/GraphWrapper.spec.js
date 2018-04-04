@@ -3,27 +3,27 @@
 import { expect } from 'chai'
 import React from 'react'
 import enzyme, { shallow } from 'enzyme'
-// import { spy } from 'sinon'
 import Adapter from 'enzyme-adapter-react-16'
 import {
-  filterDecimate,
-  setXandY,
-  filterVersion,
-  sufficientData,
   NOT_ENOUGH_ATTEMPTS,
   NOT_ENOUGH_VERSION,
   NOT_ENOUGH_DIFFICULTY_LEVEL,
   NOT_ENOUGH_DIFFICULTY_AND_VERSION,
-
+  filterDecimate,
+  setXandY,
+  filterVersion,
+  sufficientData,
 } from './GraphWrapper'
 const adapter = new Adapter()
 
-
+console.log('#########', sufficientData)
 enzyme.configure({ adapter })
 
 
 describe('GraphWrapper: ', () => {
   describe('Functions: ', () => {
+
+
     describe('SufficientData function', () => {
       let toDisplayText,
         toFilterByLevel,
