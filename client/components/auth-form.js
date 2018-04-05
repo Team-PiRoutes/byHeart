@@ -69,7 +69,7 @@ const AuthForm = (props) => {
         <a style={{ ...flexItems, alignText: 'center', color: 'purple' }} href="/auth/google">{displayName} with Google</a>
         {name !== 'signup' &&
           (<span style={{ ...flexItems, alignText: 'center', color: '#d042ff' }}> New to us?
-         <a style={{ ...flexItems, color: '#d042ff' }} href="#"> Sign Up</a>
+         <a style={{ ...flexItems, color: '#d042ff' }} href="../signup"> Sign Up</a>
           </span>)}
       </Message>
     </div>
