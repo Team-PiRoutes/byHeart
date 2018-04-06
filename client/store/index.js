@@ -1,5 +1,4 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
@@ -14,10 +13,15 @@ const reducer = combineReducers({
   rehearsals
 })
 
-const middleware = composeWithDevTools(applyMiddleware(
-  thunkMiddleware,
-  createLogger({ collapsed: true })
-))
+
+const middlewareArray = [thunkMiddleware]
+if (process.env.NODE_ENV === 'development') {
+  const createLogger = require('redux-logger')
+  middlewareArray.push(createLogger({ collapsed: true }))
+}
+
+
+const middleware = composeWithDevTools(applyMiddleware(...middlewareArray))
 const store = createStore(reducer, middleware)
 
 export default store
