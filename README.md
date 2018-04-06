@@ -4,7 +4,7 @@ ByHeart is a tool to help people memorize monologues, text passages, and other m
 
 Users can practice recalling the passage one line at a time. If they are stuck, they can mouse over a word to get a hint. The app can record the time and difficulty for each recitation, and present the data in a graph.
 
-Try it here: link_to_come
+Try it at [www.byheart.club](http://www.byheart.club/)
 
 ## Development
 
