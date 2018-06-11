@@ -27,19 +27,19 @@ class LandingPage extends Component {
       indexHeart: 0,
       indexTag: 0
     }
-    this.interval = null
+    this.intervalId = null
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.setState({
         indexHeart: (this.state.indexHeart + 1) % 6,
         indexTag: (this.state.indexTag + 1) % 11
       })
     }, 1200)
   }
-  componentWillMount() {
-    clearInterval(this.interval)
+  componentWillUnmount() {
+    window.clearInterval(this.intervalId)
   }
   render() {
     const { passages, handleTrainPassage, handleStartPassage } = this.props
