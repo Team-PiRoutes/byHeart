@@ -8,7 +8,7 @@ import TextWithLineBreaks from './TextWithLineBreaks'
 import SpannedText from './SpannedText'
 
 
-describe('Text with Line break', () => {
+describe('TextWithLineBreaks', () => {
   const adapter = new Adapter()
   enzyme.configure({ adapter })
 
