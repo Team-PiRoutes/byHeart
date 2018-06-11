@@ -4,6 +4,7 @@ import { gotPassage } from '../store/passage'
 import history from '../history'
 import { Button } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
+import { clearInterval } from 'timers'
 
 
 const card1 = [
@@ -26,17 +27,20 @@ class LandingPage extends Component {
       indexHeart: 0,
       indexTag: 0
     }
+    this.interval = null
   }
 
   componentDidMount() {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.setState({
         indexHeart: (this.state.indexHeart + 1) % 6,
         indexTag: (this.state.indexTag + 1) % 11
       })
     }, 1200)
   }
-
+  componentWillMount() {
+    clearInterval(this.interval)
+  }
   render() {
     const { passages, handleTrainPassage, handleStartPassage } = this.props
     const firstPassage = passages.filter(passage => passage.id === 1)
@@ -64,34 +68,34 @@ class LandingPage extends Component {
           </Button.Group>
         </div>
         <div id="landing-cards">
-            <div className="card-landing">
-              <div>
-                <h3>LEARN</h3>
-                <p>{card1}</p>
-                <img className="landing-card-img" src="views.gif" />
-              </div>
+          <div className="card-landing">
+            <div>
+              <h3>LEARN</h3>
+              <p>{card1}</p>
+              <img className="landing-card-img" src="views.gif" />
             </div>
-            <div className="card-landing" color="purple">
-              <div>
-                <h3>IT</h3>
-                <p>{card2}</p>
-                <img className="landing-card-img" src="decimation.gif" />
-              </div>
+          </div>
+          <div className="card-landing" color="purple">
+            <div>
+              <h3>IT</h3>
+              <p>{card2}</p>
+              <img className="landing-card-img" src="decimation.gif" />
             </div>
-            <div className="card-landing" color="purple">
-              <div>
-                <h3>BY</h3>
-                <p>{card3}</p>
-                <img className="landing-card-img" src="profile.png" />
-              </div>
+          </div>
+          <div className="card-landing" color="purple">
+            <div>
+              <h3>BY</h3>
+              <p>{card3}</p>
+              <img className="landing-card-img" src="profile.png" />
             </div>
-            <div className="card-landing" color="purple">
-              <div>
-                <h3>HEART</h3>
-                <p>{card4}</p>
-                <img className="landing-card-img" src="hint.gif" />
-              </div>
+          </div>
+          <div className="card-landing" color="purple">
+            <div>
+              <h3>HEART</h3>
+              <p>{card4}</p>
+              <img className="landing-card-img" src="hint.gif" />
             </div>
+          </div>
         </div>
       </div>
     )
