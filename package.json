@@ -17,8 +17,8 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js  ./client/**/**/*.spec.js --require @babel/polyfill --require @babel/register",
-    "test-watch": "NODE_ENV='test' mocha -w ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js ./client/**/**/*.spec.js --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js  ./client/**/**/*.spec.js --require @babel/polyfill --require @babel/register --require ./testing/setup.js",
+    "test-watch": "NODE_ENV='test' mocha -w ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js ./client/**/**/*.spec.js --require @babel/polyfill --require @babel/register --require ./testing/setup.js"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
@@ -69,6 +69,7 @@
     "eslint-config-fullstack": "^3.0.0",
     "eslint-plugin-react": "^7.4.0",
     "husky": "^0.14.3",
+    "jsdom": "^11.11.0",
     "lorem-ipsum": "^1.0.4",
     "mocha": "^3.3.0",
     "nodemon": "^1.12.1",

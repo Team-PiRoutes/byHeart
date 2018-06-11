@@ -1,7 +1,12 @@
 import React from 'react'
 import SpannedText from './SpannedText'
-const TextWithLineBreaks = (props) => {
-  const { text } = props
+
+const TextWithLineBreaks = ({
+  text,
+  decimateLevel,
+  hideHardSpace
+}) => {
+
   const lines = text.split('\n')
   return (
     <div>
@@ -11,8 +16,8 @@ const TextWithLineBreaks = (props) => {
           <div key={line}>
             <SpannedText
               content={line.trim()}
-              decimateLevel={props.decimateLevel}
-              hideHardSpace={props.hideHardSpace}
+              decimateLevel={decimateLevel}
+              hideHardSpace={hideHardSpace}
             />
           </div>
         )

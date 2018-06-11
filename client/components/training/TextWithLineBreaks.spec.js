@@ -13,12 +13,16 @@ describe('Text with Line break', () => {
   enzyme.configure({ adapter })
 
   let wrapper
-  const text = `I
+  const textProp = `I
   am
   testing`
 
   beforeEach(() => {
-    wrapper = shallow(<TextWithLineBreaks text={text} />)
+    wrapper = shallow(<TextWithLineBreaks
+      text={textProp}
+      decimateLevel={5}
+      hideHardSpace={true}
+    />)
   })
   it('Component renders a SpannedText for each line break', () => {
     expect(wrapper.find(SpannedText).length).to.equal(3)

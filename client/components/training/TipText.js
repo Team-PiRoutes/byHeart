@@ -25,11 +25,13 @@ class TipText extends React.Component {
   }
 
   handleMouseEnter() {
-    //potentially change
+    //this option is for testing.
+    let tick = this.props.tickDuration || 1500
     this.setState({
       hover: true
     })
-    this.intervalId = setInterval(this.hintTick, 1500)
+
+    this.intervalId = setInterval(this.hintTick, tick)
   }
 
 
@@ -47,18 +49,21 @@ class TipText extends React.Component {
     let styleObj = {}
 
     if (this.state.hover) {
-      styleObj.backgroundColor = highLight ? highLight : `rgb(240, 238, 241)`
+      styleObj.backgroundColor = highLight || `rgb(240, 238, 241)`
 
       const isHint = this.state.hintLevel !== this.props.decimateLevel
       if (isHint) {
-        styleObj.textShadow = hintColor ? hintColor : 'rgb(78, 78, 78) 0px 0px 0.5px'
+        styleObj.textShadow = hintColor || 'rgb(78, 78, 78) 0px 0px 0.5px'
       }
     }
     return (
       <span
-        onMouseEnter={this.handleMouseEnter} onMouseOut={this.handleMouseOut}
-        style={styleObj}>
-        {this.props.hintArray[this.state.hintLevel]}  </span>
+        onMouseEnter={this.handleMouseEnter}
+        onMouseOut={this.handleMouseOut}
+        style={styleObj}
+      >
+        {this.props.hintArray[this.state.hintLevel]}
+      </span>
     )
   }
 }
