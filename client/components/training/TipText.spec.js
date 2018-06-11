@@ -77,12 +77,12 @@ describe('TipText ', () => {
     let wrapper
     let level = 5
     beforeEach(() => {
-      console.log('before each')
+      // console.log('before each')
       wrapper = mount(<TipText
         decimateLevel={level}
         hintArray={fakeArray}
         tickDuration={10} />)
-      console.log('the wrapper:  ')
+      // console.log('the wrapper:  ')
     })
     afterEach(() => {
       wrapper.unmount()
