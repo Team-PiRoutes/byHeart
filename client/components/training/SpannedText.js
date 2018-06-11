@@ -28,7 +28,10 @@ function spannifyArray(grid, level) {
     const column = grid.map(row => row[i])
     let id = Math.floor((Math.random() * Math.pow(10, 10))).toString(36) + i.toString()
     return (
-      <TipText key={id} decimateLevel={level} hintArray={column} />
+      <TipText
+        key={id}
+        decimateLevel={level}
+        hintArray={column} />
     )
   }
   )

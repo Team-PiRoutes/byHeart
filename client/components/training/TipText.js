@@ -61,9 +61,9 @@ class TipText extends React.Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseOut={this.handleMouseOut}
         style={styleObj}
-      >
-        {this.props.hintArray[this.state.hintLevel]}
-      </span>
+      >{/* do not refactor ".hintLevel]} </span>" it is
+        necessary for proper word spacing.*/}
+        {this.props.hintArray[this.state.hintLevel]} </span>
     )
   }
 }
