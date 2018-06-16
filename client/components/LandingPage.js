@@ -4,7 +4,6 @@ import { gotPassage } from '../store/passage'
 import history from '../history'
 import { Button } from 'semantic-ui-react'
 import { decimateString } from '../utils/decimate'
-import { clearInterval } from 'timers'
 
 
 const card1 = [
